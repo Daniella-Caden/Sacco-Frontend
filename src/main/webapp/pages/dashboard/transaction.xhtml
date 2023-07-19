@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <h:outputStylesheet name="css/App.css"/>
+    </f:facet>
+  
+</h:head>
+<ui:insert name="memberHeader">
+  <!-- Include the header content -->
+  <ui:include src="/template/memberHeader.xhtml" />
+</ui:insert>
+
+                    
+                    
+             
+  
+
+<h:body style ="background-color: rgb(252, 250, 250);">
+    
+
+    
+        <div class="card-container">
+            
+              
+            <ui:insert name="memberHeader">
+                <!-- Include the header content -->
+                <ui:include src="/template/loginSideBar1.xhtml" />
+              </ui:insert>
+                  
+              
+              
+
+          
+              
+              
+
+<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
+    <h1 style="text-align: center; color:#4169E1">Transaction</h1>
+   <div class="card flex justify-content-center">
+
+      <f:view>
+         <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
+            <h:form>
+
+
+                  
+
+            <div class="formgrid grid">
+               <div class="field col-12 md:col-6 ">
+                  <label for="firstname6">Amount</label>
+                  <input id="firstname6" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+               </div>
+              
+               
+               
+               
+               <div class="field col-12 md:col-3">
+                  <label for="state">Type of Transaction</label>
+                  <select id="state" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
+                     <option>Deposit</option>
+                     <option>Withdraw</option>
+        
+                  </select>
+               </div>
+
+
+
+            </div>
+
+               <p:divider/>
+            
+            <div class="field col-12 md:col-6">
+               <p:button value="Submit" style="background-color:#4169E1" outcome="#{navigation.dashboard}"/>
+                <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+
+              </div>
+         </h:form>
+         </div>
+
+      </f:view>
+   </div>
+
+</p:card>
+
+                 
+</div>
+<div>
+
+</div>
+               
+</h:body>
+  
+
+</html>

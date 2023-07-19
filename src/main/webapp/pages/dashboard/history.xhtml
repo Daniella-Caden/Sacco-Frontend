@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+        <h:outputStylesheet name="css/App.css"/>
+    </f:facet>
+   
+</h:head>
+<ui:insert name="memberHeader">
+  <!-- Include the header content -->
+  <ui:include src="/template/memberHeader.xhtml" />
+</ui:insert>
+  
+
+<h:body style ="background-color: rgb(252, 250, 250);">
+    
+
+    <h:form>
+        <div class="card-container">
+            <ui:insert name="memberHeader">
+  <!-- Include the header content -->
+  <ui:include src="/template/loginSideBar1.xhtml" />
+</ui:insert>
+             
+              
+              
+
+          
+              
+              
+
+<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
+    <div class="card">
+    <p:dataTable var="user" value="#{userView.users}">
+        <p:column headerText="Date" style="color:#4169E1; font-size:x-large">
+            <h:outputText value="06/09/2022" style="color:black;"/>
+        </p:column>
+
+        <p:column headerText="Type of Transaction" style="color:#4169E1; font-size:x-large;">
+            <h:outputText value="Withdraw" style="color:black;"/>
+        </p:column>
+
+        <p:column headerText="Amount(UGX)" style="color:#4169E1; font-size:x-large">          
+          <h:outputText value="500,000" style="color:black;"/>
+        </p:column>
+
+       >
+    </p:dataTable>
+</div> 
+
+   
+
+</p:card>
+
+                 
+</div>
+<div>
+
+</div>
+    </h:form>              
+</h:body>
+  
+
+</html>
