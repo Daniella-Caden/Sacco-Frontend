@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
 
 @Entity
 @Table(name="transactions")
@@ -58,7 +60,7 @@ public class Transactions {
         return transactionType;
     }
 
-    
+
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
@@ -69,6 +71,8 @@ public class Transactions {
     }
 
     public void setAmount(int amount) {
+        
+        
         this.amount = amount;
     }
 

@@ -22,6 +22,9 @@ import org.pahappa.systems.kimanyisacco.services.MemberImpl;
 import org.pahappa.systems.kimanyisacco.services.UserImpl;
 import org.primefaces.PrimeFaces;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @ManagedBean(name = "registration")
 @ViewScoped
 public class Registration {
@@ -30,6 +33,8 @@ public class Registration {
   private String range;
   private Date orignaldateOfBirth;
   private boolean success;
+  private static final String EMAIL_REGEX =
+            "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
   public boolean getSuccess() {
     return success;
@@ -90,7 +95,11 @@ public class Registration {
     range = Integer.toString(localMaxDate.getYear()).concat(":").concat(Integer.toString(localMinDate.getYear()));
 
   }
-
+  public static boolean isValidEmail(String email) {
+    Pattern pattern = Pattern.compile(EMAIL_REGEX);
+    Matcher matcher = pattern.matcher(email);
+    return matcher.matches();
+}
   private void addFlashMessage(FacesMessage.Severity severity, String summary, String detail) {
     FacesContext facesContext = FacesContext.getCurrentInstance();
     Flash flash = facesContext.getExternalContext().getFlash();
@@ -100,15 +109,17 @@ public class Registration {
 
   public void doRegistration() throws IOException {
 
+    if(isValidEmail(member.getEmail())){
     System.out.println(member.getLastName());
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     member.setDateOfBirth(sdf.format(orignaldateOfBirth));
+
 
   success = memberImpl.createMember(member);
 
     if (success) {
 
-       addFlashMessage(FacesMessage.SEVERITY_INFO, "Registration Successful","Congratulations! You have been successfully registered.");
+       //addFlashMessage(FacesMessage.SEVERITY_INFO, "Registration Successful","Congratulations! You have been successfully registered.");
       // FacesContext.getCurrentInstance().addMessage("growl",
       //     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration Successful",
       //         "Please enter a different email address."));
@@ -137,6 +148,13 @@ public class Registration {
     for (Members member : result) {
       System.out.println(member.getAccountBalance());
     }
+  }
+else{
+  FacesContext.getCurrentInstance().addMessage("growl",
+  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid Email",
+      "The email you entered is invalid. Please enter a different email address."));
+}
+
   }
   public void redirect() throws IOException{
           String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();

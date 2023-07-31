@@ -110,12 +110,53 @@ public List<Members> getJoinRequests(){
             // Handle the exception if the email sending fails
         }
     }
+
+    public void sendRejectionEmail(String recipientEmail,String firstName) {
+        // Configure the email properties
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+
+
+        // Set up the session with the authentication details
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("caden.wwdd@gmail.com", "tlipzljibdhzptke");
+            }
+        });
+
+        try {
+            // Create a new message
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("caden.wwdd@gmail.com","Kimwanyi SACCO"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            message.setSubject("Kimwanyi SACCO Membership Approval");
+            message.setText( "Dear "+ firstName + ",\n\n" +
+            "We regret to inform you that your membership application to Kimwanyi SACCO has been declined!\n\n Kimwanyi SACCO Team");
+
+            // Send the email
+            Transport.send(message);
+
+            System.out.println("Email sent successfully!");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            // Handle the exception if the email sending fails
+        }catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            // Handle the exception if the email sending fails
+        }
+    }
     
 public Members getMemberByUsername(String userName){
     return memberDAO.getMemberByUsername(userName);
 }
- public void updateStatus(String userName){
-    memberDAO.updateStatus(userName);
+ public void updateStatus(String userName,String status){
+    memberDAO.updateStatus(userName,status);
  }  
 
  public void updateMember(Members updatedDetails){

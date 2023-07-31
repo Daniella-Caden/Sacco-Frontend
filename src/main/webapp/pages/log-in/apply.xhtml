@@ -38,38 +38,38 @@
             <div class="formgrid grid">
                <div class="field col-12 md:col-6 ">
                   <label for="firstname6">First Name</label>
-                  <p:inputText id="firstname6" type="text" value="#{registration.member.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  <p:inputText id="firstname6" type="text" value="#{registration.member.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="First Name is required"/>
                </div>
                <div class="field col-12 md:col-6 ">
                   <label for="lastname6">Last Name</label>
-                  <p:inputText id="lastname6" value="#{registration.member.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  <p:inputText id="lastname6" value="#{registration.member.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Last Name is required"/>
                </div>
                <div class="field col-12 md:col-6">
                   <label for="location">Location</label>
-                  <p:inputText id="location" type="text" value="#{registration.member.location}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  <p:inputText id="location" type="text" value="#{registration.member.location}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Location is required"/>
                </div>
                
                <div class="field col-12 md:col-3">
                   <label for="date">Date of Birth</label>
-                  <p:datePicker  id="date"  value="#{registration.orignaldateOfBirth}" yearNavigator="true" yearRange="#{registration.range}"/>
+                  <p:datePicker  id="date"  value="#{registration.orignaldateOfBirth}" yearNavigator="true" yearRange="#{registration.range}" required="true" requiredMessage="First Name is required"/>
                </div>
             
 
                <div class="field col-12">
                   <div class="field">
                      <label for="email">Email</label>
-                     <p:inputText id="email" type="text" value="#{registration.member.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="email" type="text" value="#{registration.member.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Email Address is required"/>
                   </div>
                </div>
                <div class="field col-12 md:col-6">
                   <label for="city">Telephone Contact</label>
-                  <p:inputText id="city" type="text" value="#{registration.member.telephoneContact}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  <p:inputMask mask="0999999999" id="city" type="text" value="#{registration.member.telephoneContact}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Telephone Number is required"/>
                </div>
               
 
                <div class="field col-12 md:col-3">
                   <h:outputLabel for="state" value="Gender"/>
-                  <h:selectOneMenu id="state" value="#{registration.member.gender}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
+                  <h:selectOneMenu id="state" value="#{registration.member.gender}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto" required="true" requiredMessage="Gender is required">
                      <f:selectItem itemValue="Male" itemLabel="Male"/>
                      <f:selectItem itemValue="Female" itemLabel="Female"/>
         
@@ -88,16 +88,16 @@
                <div class="formgrid grid">
                   <div class="field col-12 md:col-6 ">
                      <label for="bank">Current Employment</label>
-                     <p:inputText id="currentEmployment" type="text" value="#{registration.member.currentEmployment}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="currentEmployment" type="text" value="#{registration.member.currentEmployment}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Current Employment is required"/>
                   </div>
                   <div class="field col-12 md:col-6 ">
                      <label for="employerName">Employer Name</label>
-                     <p:inputText id="employerName" type="text" value="#{registration.member.employerName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="employerName" type="text" value="#{registration.member.employerName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Employee Name is required"/>
                   </div>
 
                   <div class="field col-12 md:col-6 ">
                      <label for="income">Employer Phone Number</label>
-                     <p:inputText id="employerPhoneNumber" type="text" value="#{registration.member.employerPhoneNumber}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputMask mask="0999999999"  id="employerPhoneNumber" type="text" value="#{registration.member.employerPhoneNumber}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Employee Phone Number is required"/>
                   </div>
                   <div class="field col-12 md:col-6">
                      <label for="option">Job Position</label>
@@ -111,11 +111,11 @@
                      
                       <div class="field col-12 md:col-6 ">
                          <label for="bank">Monthly Salary</label>
-                         <p:inputText id="bank" type="text" value="#{registration.member.monthlySalary}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                         <p:inputText id="bank" type="text" value="#{registration.member.monthlySalary}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Monthly Salary is required"/>
                       </div>
                       <div class="field col-12 md:col-6 ">
                          <label for="account">Sources of Income</label>
-                         <p:inputText id="account" type="text" value="#{registration.member.sourcesOfIncome}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                         <p:inputText id="account" type="text" value="#{registration.member.sourcesOfIncome}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Source of Income is required"/>
                       </div>
     
                       
@@ -125,17 +125,17 @@
                <div class="formgrid grid">
                   <div class="field col-12 md:col-6 ">
                      <label for="bank">Name</label>
-                     <p:inputText id="refereeName" value="#{registration.member.refereeName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="refereeName" value="#{registration.member.refereeName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Referee Name is required"/>
                   </div>
                   <div class="field col-12 md:col-6 ">
                      <label for="refereePhoneNumber">Phone Number</label>
-                     <p:inputText id="refereePhoneNumber" value="#{registration.member.refereePhoneNumber}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputMask mask="09999999999"  id="refereePhoneNumber" value="#{registration.member.refereePhoneNumber}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Referee Phone Number is required"/>
                   </div>
 
                   
                   <div class="field col-12 md:col-3">
                      <label for="option">Job Position</label>
-                     <p:inputText id="refereePosition" type="text" value="#{registration.member.jobPosition}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="refereePosition" type="text" value="#{registration.member.jobPosition}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" required="true" requiredMessage="Job Position is required"/>
                   </div>    
 
                
@@ -147,6 +147,8 @@
                 <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
 
               </div>
+
+              
          </h:form>
          </div>
 

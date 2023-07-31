@@ -158,8 +158,18 @@ public Members getMember(){
 
   public void Approve(String userName,String firstName) throws IOException{
     System.out.println(userName);
-    memberImpl.updateStatus(userName);
+    memberImpl.updateStatus(userName,"APPROVED");
     memberImpl.sendApprovalEmail(userName,firstName);
+    String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+    System.out.println("mybaseurl:"+context);
+    FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   
+
+  }
+
+  public void Reject(String userName,String firstName) throws IOException{
+    System.out.println(userName);
+    memberImpl.updateStatus(userName,"REJECTED");
+    memberImpl.sendRejectionEmail(userName,firstName);
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   

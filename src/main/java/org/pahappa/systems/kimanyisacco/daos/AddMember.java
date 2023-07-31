@@ -84,7 +84,7 @@ public List<Members> getMembers(){
 }
 
 
-public void updateStatus(String userName){
+public void updateStatus(String userName, String status){
     Transaction transaction = null;
     try{
     Session session = SessionConfiguration.getSessionFactory().openSession();
@@ -92,7 +92,7 @@ public void updateStatus(String userName){
     Members member = (Members) session.get(Members.class,userName);
 
     
-    member.setStatus("APPROVED");
+    member.setStatus(status);
 
     
     session.update(member);

@@ -47,15 +47,13 @@
           
     <p:dataTable var="member" widgetvar="member" paginator="true" rows="6" sortMode="single" value="#{admin.viewJoin()}">
        
-        <p:column headerText="Date" style="color:#4169E1; font-size:x-large" >
-            <h:outputText value="06/09/2022" style="color:black;"/>
-        </p:column>
+       
 
-        <p:column headerText=" First Name" style="color:#4169E1; font-size:x-large;" >
+        <p:column headerText=" First Name" style="color:#4169E1; font-size:x-large;" filterBy="#{member.firstName}">
             <h:outputText value="#{member.firstName}" style="color:black;"/>
         </p:column>
 
-        <p:column headerText=" Last Name" style="color:#4169E1; font-size:x-large;" >
+        <p:column headerText=" Last Name" style="color:#4169E1; font-size:x-large;" filterBy="#{member.lastName}" >
             <h:outputText value="#{member.lastName}" style="color:black;"/>
         </p:column>
 
