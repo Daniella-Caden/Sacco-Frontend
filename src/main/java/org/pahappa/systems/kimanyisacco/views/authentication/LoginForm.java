@@ -35,6 +35,7 @@ private Transactions recentTransaction;
 private int withdraws;
 private int joins;
 private int memberNumber;
+private Members m;
 public int getWithdraws() {
   return withdraws;
 }
@@ -106,7 +107,13 @@ public void setAccountBalance(double accountBalance) {
 }
 
 
+public Members getM(){
+  return m;
+}
 
+public void  setM(Members m){
+this.m=m;
+}
 
 
 public Members getMember(){
@@ -123,6 +130,7 @@ public Members getMember(){
       this.member=new Members();
        this.memberResult=new Members();
        this.recentTransaction= new Transactions();
+       this.m = new Members();
         
     
     }
@@ -195,7 +203,7 @@ String context= FacesContext.getCurrentInstance().getExternalContext().getReques
         // Retrieve the user's email from the session
         String userEmail = (String) session.getAttribute("userName");
     
-        Members m = memberImpl.getMemberByUsername(userEmail);
+         m = memberImpl.getMemberByUsername(userEmail);
  recentTransaction = transImpl.getRecent(member.getUserName());
   DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
        formattedBalance = decimalFormat.format(m.getAccountBalance());
@@ -206,6 +214,18 @@ withdraws = transImpl.getWithdraws();
   
    }
 
+   public void logOut(){
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpSession session = (HttpSession) externalContext.getSession(true);
+        
+       if(session!=null){
+        session.invalidate();
+        FacesContext.getCurrentInstance().addMessage("growl",
+    new FacesMessage(FacesMessage.SEVERITY_INFO, "Logout Successful",
+        ""));
+       }
+   }
 
   
 }

@@ -52,6 +52,18 @@ public class TransactionsImpl{
         transDAO.updateWithdraw(trans);
      }
    
+     public List<Transactions> getTransactions(){
+    return transDAO.getTransactions();
+
+     }
+
+     public int getWithdrawType(){
+        return (transDAO.getWithdrawType()).size();
+     }
+
+     public int getDepositType(){
+        return (transDAO.getDepositType()).size();
+     }
 
     
 }

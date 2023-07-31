@@ -29,6 +29,15 @@ public class Registration {
   private Date maxDate;
   private String range;
   private Date orignaldateOfBirth;
+  private boolean success;
+
+  public boolean getSuccess() {
+    return success;
+  }
+
+  public void setSuccess(Boolean success) {
+    this.success = success;
+  }
 
   public Date getOrignaldateOfBirth() {
     return orignaldateOfBirth;
@@ -95,18 +104,17 @@ public class Registration {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     member.setDateOfBirth(sdf.format(orignaldateOfBirth));
 
-    boolean success = memberImpl.createMember(member);
+  success = memberImpl.createMember(member);
 
     if (success) {
 
-      // addFlashMessage(FacesMessage.SEVERITY_INFO, "Registration
-      // Successful","Congratulations! You have been successfully registered.");
-      FacesContext.getCurrentInstance().addMessage("growl",
-          new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration Successful",
-              "Please enter a different email address."));
+       addFlashMessage(FacesMessage.SEVERITY_INFO, "Registration Successful","Congratulations! You have been successfully registered.");
+      // FacesContext.getCurrentInstance().addMessage("growl",
+      //     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration Successful",
+      //         "Please enter a different email address."));
       // PrimeFaces.current().ajax().update("form:growl");
     
-       String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+        String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
        System.out.println("mybaseurl:" + context);
        FacesContext.getCurrentInstance().getExternalContext().redirect(context + "/pages/log-in/home.xhtml");
     }
@@ -127,7 +135,7 @@ public class Registration {
     result = memberImpl.getAllMembers();
 
     for (Members member : result) {
-      System.out.println(member.getDateOfBirth());
+      System.out.println(member.getAccountBalance());
     }
   }
   public void redirect() throws IOException{

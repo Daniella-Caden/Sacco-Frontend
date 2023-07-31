@@ -40,6 +40,7 @@ public class MemberImpl  {
             member.setStatus("PENDING");
         }
 
+        member.setAccountBalance(0);
         
       return  memberDAO.save(member);
 
@@ -123,6 +124,8 @@ public Members getMemberByUsername(String userName){
  
  public Members checkUserCredentials(String userName,String password){
     Members memberByCredentials = memberDAO.getMemberByCredentials(userName);
+
+    if(memberByCredentials!=null){
     String storedPassword = memberByCredentials.getPassword();
     boolean passwordMatches = BCrypt.checkpw(password, storedPassword);
   
@@ -134,6 +137,10 @@ public Members getMemberByUsername(String userName){
     else{
         return null;
     }
+}
+
+else
+return null;
    
  }
 
@@ -158,7 +165,6 @@ String storedPassword = passwordCheck.getPassword();
 
  }
 
-
  
  
  public int getJoins(){
@@ -169,6 +175,10 @@ public int getMembers(){
 
     return (memberDAO.getMembers()).size();
 
+}
+
+public List<Members> getMember(){
+    return memberDAO.getMembers();
 }
 
 }

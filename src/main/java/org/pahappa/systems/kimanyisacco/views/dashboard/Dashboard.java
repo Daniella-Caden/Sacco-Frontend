@@ -173,6 +173,8 @@ System.out.println(userEmail);
 
 
     public void doTransaction() throws IOException {
+
+       
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         HttpSession session = (HttpSession) externalContext.getSession(false);
@@ -183,7 +185,7 @@ System.out.println(userEmail);
         // Retrieve the associated Members entity from the database using the userEmail
         Members m = memberImpl.getMemberByUsername(userEmail);
         
-    
+    if(trans.getAmount()>0){
         // Make sure the member exists before proceeding
         if (m != null) {
             LocalDate localDateToStore = LocalDate.now();
@@ -215,6 +217,12 @@ System.out.println(userEmail);
         } else {
             
         }
+    }
+    else{
+        FacesContext.getCurrentInstance().addMessage("growl",
+        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdraw Request Failed",
+            "Please enter a valid value"));
+    }
     }
 
     public void viewProfile() throws IOException{

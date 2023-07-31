@@ -58,6 +58,7 @@ public class Transactions {
         return transactionType;
     }
 
+    
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }

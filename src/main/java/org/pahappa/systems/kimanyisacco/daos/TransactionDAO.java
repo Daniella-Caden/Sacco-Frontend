@@ -252,6 +252,51 @@ public List<Transactions> getNotifications(String userName) {
     
     }
 
+    public List<Transactions> getTransactions(){
+
+        try  {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+            
+            Criteria criteria = session.createCriteria(Transactions.class);
+            
+            
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+    public List<Transactions> getWithdrawType(){
+        try  {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+            
+            Criteria criteria = session.createCriteria(Transactions.class);
+            criteria.add(Restrictions.eq("transactionType", "withdraw"));
+            
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Transactions> getDepositType(){
+        try  {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+            
+            Criteria criteria = session.createCriteria(Transactions.class);
+            criteria.add(Restrictions.eq("transactionType", "deposit"));
+            
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     }
 
 

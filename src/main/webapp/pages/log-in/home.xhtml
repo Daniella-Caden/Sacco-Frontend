@@ -26,7 +26,8 @@
 
 <h:body class ="body">
     
-
+<f:view>
+  <f:event type="preRenderView" listener="#{loginForm.logOut()}" />
     <h:form>
       <p:growl id="growl" showDetail="true" sticky="false" />
         <div class="card-container">
@@ -44,19 +45,19 @@
 
         At Kimwanyi SACCO, we are dedicated to the financial empowerment of our local community in the small town of Kimwanyi. <br/>
 
-        <b class="h2" style="font-size:25px;">Our Purpose:</b><br/>
+        <b class="h2" style="font-size:22px;">Our Purpose:</b><br/>
 
-       <b style="font-size:25px;"> Community Focus:</b> Kimwanyi SACCO has a strong focus on supporting and uplifting the local community. We strive to provide accessible and affordable financial services to the residents of our village, empowering them to achieve their financial goals.<br/>
+       <b style="font-size:22px;"> Community Focus:</b> Kimwanyi SACCO has a strong focus on supporting and uplifting the local community. We strive to provide accessible and affordable financial services to the residents of our village, empowering them to achieve their financial goals.<br/>
 
-        <b class="h2" style="font-size:25px;">Member Benefits:</b> <br/>
+        <b class="h2" style="font-size:18px;">Member Benefits:</b> <br/>
 
-        <b style="font-size:25px;">Savings:</b> Easily save and grow your money with our competitive interest rates and flexible savings plans tailored to meet your needs.<br/>
+        <b style="font-size:18px;">Savings:</b> Easily save and grow your money with our competitive interest rates and flexible savings plans tailored to meet your needs.<br/>
 
-        <b style="font-size:25px;">Credit Facilities:</b> Access credit facilities for various purposes, such as education, business development, or emergencies, with convenient repayment options.<br/>
+        <b style="font-size:18px;">Credit Facilities:</b> Access credit facilities for various purposes, such as education, business development, or emergencies, with convenient repayment options.<br/>
 
-       <b style="font-size:25px;"> Account Management:</b> Our user-friendly online platform allows you to manage your accounts, track your savings, and view transaction history anytime, anywhere.<br/>
+       <b style="font-size:18px;"> Account Management:</b> Our user-friendly online platform allows you to manage your accounts, track your savings, and view transaction history anytime, anywhere.<br/>
 
-        <b style="font-size:25px;">Community Support:</b> By joining Kimwanyi SACCO, you become part of a community-focused organization that invests in local development initiatives and promotes financial literacy among its members.
+        <b style="font-size:18px;">Community Support:</b> By joining Kimwanyi SACCO, you become part of a community-focused organization that invests in local development initiatives and promotes financial literacy among its members.
       </p>
    
   </div>
@@ -65,7 +66,8 @@
                  
 </div>
 
-    </h:form>              
+    </h:form> 
+</f:view>             
 </h:body>
   
 

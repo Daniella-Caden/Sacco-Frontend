@@ -41,28 +41,33 @@
               
               
 
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
+
     <div class="card">
        
           
-    <p:dataTable paginator="true" rows="6" sortMode="single" var="t" value="#{admin.viewRequests()}">
+    <p:dataTable  paginator="true" widgetVar="members" rows="6" sortMode="single" style="width: 76rem; height: 35rem; position:fixed;top:120px;right:8px;overflow-y:auto;" var="member" value="#{admin.viewMembers()}">
         
-        <p:column headerText="Date" style="color:#4169E1; font-size:x-large" >
-            <h:outputText value="#{t.createdOn}" style="color:black;"/>
-        </p:column>
+       <span class="filter-container ui-input-icon-left">
+        <i class="pi pi-search"></i>
+        <p:inputText id="globalFilter" onkeyup="PF('members').filter()" placeholder="Search"/>
+       </span>
 
-        <p:column headerText=" First Name" style="color:#4169E1; font-size:x-large;" >
-            <h:outputText value="#{t.member.firstName}" style="color:black;"/>
-        </p:column>
-
-        <p:column headerText=" Last Name" style="color:#4169E1; font-size:x-large;" >
-            <h:outputText value="#{t.member.lastName}" style="color:black;"/>
+        <p:column headerText=" First Name" style="color:#4169E1; font-size:x-large;" sortBy="#{member.firstName}" filterBy="#{member.firstName}">
+            <h:outputText value="#{member.firstName}" style="color:black;"/>
         </p:column>
 
         
+
+        <p:column headerText=" Last Name" style="color:#4169E1; font-size:x-large;" sortBy="#{member.lastName}" filterBy="#{member.lastName}">
+            <h:outputText value="#{member.lastName}" style="color:black;"/>
+        </p:column>
+
+        <p:column headerText="Account Balance" style="color:#4169E1; font-size:x-large" sortBy="#{member.accountBalance}" filterBy="#{member.accountBalance}">
+            <h:outputText value="#{member.accountBalance}" style="color:black;"/>
+        </p:column>
         
         <p:column >          
-        <p:commandButton value="View" styleClass="ui-button-success" style="width:100px;height:50px;" action="#{admin.viewWithdrawal(t)}"/>
+        <p:commandButton value="View" styleClass="ui-button-success" style="width:100px;height:50px;" action="#{admin.memberView(member)}"/>
         </p:column>
 
     
@@ -73,7 +78,7 @@
 
    
 
-</p:card>
+
 
                  
 </div>

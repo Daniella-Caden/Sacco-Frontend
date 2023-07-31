@@ -8,6 +8,7 @@ p {
     flex-wrap: wrap;
     gap: 2em;
     margin-top: 6%;
+    justify-content: space-between;
 }
 
 .button-like-text {
@@ -120,6 +121,7 @@ color:#4169E1;font-size:25px;
 .h2{
 color:#4169E1;
 }
+
 .body{
 background-color: rgb(252, 250, 250);
 }

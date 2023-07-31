@@ -20,6 +20,8 @@
 
 
 <h:body>
+  
+  
   <h1 style="text-align: center; color:#4169E1">Application Form</h1>
    <div class="card flex justify-content-center">
 
@@ -141,7 +143,7 @@
 
 
             <div class="field col-12 md:col-6">
-               <p:commandButton  id="applybutton"  value="Apply" action="#{registration.doRegistration()}"  update="growl"/>
+               <p:commandButton  id="applybutton"  value="Apply" action="#{registration.doRegistration()}" update="growl"/>
                 <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
 
               </div>
@@ -150,7 +152,11 @@
 
       </f:view>
    </div>
-
+   <h:panelGroup rendered="#{registration.success}">
+   <script>
+      setTimeout(10000);
+   </script>
+</h:panelGroup>
 
 </h:body>
 
