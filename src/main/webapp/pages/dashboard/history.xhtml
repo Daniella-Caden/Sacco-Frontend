@@ -41,9 +41,8 @@
               
               
 
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
-    <div class="card">
-    <p:dataTable var="transaction" value="#{dashboard.viewTransactions()}">
+  <div class="card">
+    <p:dataTable var="transaction" style="width: 76rem; height: 35rem; position:fixed;top:120px;right:8px;overflow-y:auto;" value="#{dashboard.viewTransactions()}">
         <p:column headerText="Date" style="color:#4169E1; font-size:x-large">
             <h:outputText value="#{transaction.createdOn}" style="color:black;"/>
         </p:column>
@@ -62,7 +61,7 @@
 
    
 
-</p:card>
+
 
                  
 </div>

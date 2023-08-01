@@ -225,14 +225,14 @@ System.out.println(userEmail);
             "Please enter a valid value"));
     }
     }
-
+    String userEmail;
     public void viewProfile() throws IOException{
     FacesContext facesContext = FacesContext.getCurrentInstance();
     ExternalContext externalContext = facesContext.getExternalContext();
     HttpSession session = (HttpSession) externalContext.getSession(false);
         
         // Retrieve the user's email from the session
-     String userEmail = (String) session.getAttribute("userName");
+    userEmail = (String) session.getAttribute("userName");
 
     memberDetails = memberImpl.getMemberByUsername(userEmail); 
 String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();

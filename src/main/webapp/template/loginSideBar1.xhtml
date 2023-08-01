@@ -32,19 +32,37 @@
 
                     <span style="display: flex; align-items: center;">
                       <p:graphicImage library="images" name="home.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <a href="Dashboard.xhtml" class="button-like-text">Dashboard</a>
+                      <p:link outcome="#{navigation.dashboard}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Dashboard</p:link>
                     </span>
               
                     <span style="display: flex; align-items: center;">
                       <p:graphicImage library="images" name="transaction.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <a href="transaction.xhtml" class="button-like-text">Make a transaction</a>
+                      <p:link outcome="#{navigation.transaction}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Make a transaction</p:link>
 
                     </span>
               
                    
                     <span style="display: flex; align-items: center;">
                         <p:graphicImage library="images" name="history.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <a href="history.xhtml" class="button-like-text">Transaction History</a>
+                        <p:link outcome="#{navigation.history}" style="background: none;
+                        border: none;
+                        color: #4169E1 ;
+                        cursor: pointer;
+                        text-decoration: none;
+                        transition: color 0.3s;
+                        font-size: 18px;">Transaction History</p:link>
                        
 
                       </span>

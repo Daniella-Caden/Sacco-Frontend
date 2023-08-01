@@ -9,6 +9,18 @@
 >
 <h:head>
     <h:outputStylesheet name="css/App.css"/>
+    <style>
+.button-like-text{
+background: none;
+border: none;
+color: #4169E1 ;
+cursor: pointer;
+text-decoration: none;
+transition: color 0.3s;
+font-size: 18px;
+}
+
+    </style>
       
 </h:head>
 
@@ -18,30 +30,60 @@
           <div class="card1-div2">
             <span class="card1-span">
               <p:graphicImage library="images" name="home.png" alt="image not there" class="linkImage" />
-              <a href="home.xhtml" class="button-like-text">Home</a>
+              <p:link outcome="#{navigation.home}" style="background: none;
+              border: none;
+              color: #4169E1 ;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 18px;">Home</p:link>
 
             </span>
       
             <span class="card1-span">
               <p:graphicImage library="images" name="aboutUspng.png" alt="image not there" class="linkImage" />
-              <a href="aboutUs.xhtml" class="button-like-text">About Us</a>
+              <p:link outcome="#{navigation.about}" style="background: none;
+              border: none;
+              color: #4169E1 ;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 18px;">About Us</p:link>
 
             </span>
       
             <span class="card1-span">
               <p:graphicImage library="images" name="eligibity.png" alt="image not there" class="linkImage" />
-              <a href="member.xhtml" class="button-like-text">Member Eligibity</a>
+              <p:link outcome="#{navigation.memberEligibility}" style="background: none;
+              border: none;
+              color: #4169E1 ;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 18px;">Member Eligibity</p:link>
 
             </span>
             <span class="card1-span">
                 <p:graphicImage library="images" name="apply.png" alt="image not there" class="linkImage" />
-                <a href="apply.xhtml" class="button-like-text">Apply to join</a>
+                <p:link outcome="#{navigation.apply}" style="background: none;
+                border: none;
+                color: #4169E1 ;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 18px;">Apply to join</p:link>
 
               </span>
 
               <span class="card1-span">
                 <p:graphicImage library="images" name="contact.jpg" alt="image not there" class="linkImage" />
-                <a href="contactUs.xhtml" class="button-like-text">Contact Us</a>
+                <p:link outcome="#{navigation.contactUs}" style="background: none;
+                border: none;
+                color: #4169E1 ;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 18px;">Contact Us</p:link>
 
               </span>
           </div>

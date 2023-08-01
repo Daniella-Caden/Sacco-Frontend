@@ -22,9 +22,12 @@ public class TransactionsImpl{
   public int getWithdraws(){
     return (transDAO.getWithdrawalRequests()).size();
   }
+
     public List<Transactions> getWithdrawalRequests(){
         return transDAO.getWithdrawalRequests();
     }
+
+   
  public List<Transactions> getNotifications(String userName){
         return transDAO.getNotifications(userName);
     }

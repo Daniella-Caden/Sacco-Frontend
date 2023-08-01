@@ -32,30 +32,60 @@
                    
                     <span style="display: flex; align-items: center;">
                       <p:graphicImage library="images" name="home.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <a href="adminDashboard.xhtml" class="button-like-text">Dashboard</a>
+                      <p:link outcome="#{navigation.adminDashboard}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Dashboard</p:link>
 
                     </span>
               
                     <span style="display: flex; align-items: center;">
                       <p:graphicImage library="images" name="joinrequest.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <a href="joinRequests.xhtml" class="button-like-text">Requests to Join SACCO</a>
+                      <p:link outcome="#{navigation.joins}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Requests to Join SACCO</p:link>
 
                     </span>
               
                     <span style="display: flex; align-items: center;">
                       <p:graphicImage library="images" name="aboutUspng.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <a href="members.xhtml" class="button-like-text">Members</a>
+                      <p:link outcome="#{navigation.members}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Members</p:link>
 
                     </span>
                     <span style="display: flex; align-items: center;">
                         <p:graphicImage library="images" name="withdraw.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <a href="withdrawalRequests.xhtml" class="button-like-text">Withdrawal Requests</a>
+                        <p:link outcome="#{navigation.withdraws}" style="background: none;
+                        border: none;
+                        color: #4169E1 ;
+                        cursor: pointer;
+                        text-decoration: none;
+                        transition: color 0.3s;
+                        font-size: 18px;">Withdrawal Requests</p:link>
 
                       </span>
 
                       <span style="display: flex; align-items: center;">
                         <p:graphicImage library="images" name="reports5.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <a href="adminReports.xhtml" class="button-like-text">Reports</a>
+                        <p:link outcome="#{navigation.adminReports}" style="background: none;
+                        border: none;
+                        color: #4169E1 ;
+                        cursor: pointer;
+                        text-decoration: none;
+                        transition: color 0.3s;
+                        font-size: 18px;">Reports</p:link>
 
                       </span>
 
