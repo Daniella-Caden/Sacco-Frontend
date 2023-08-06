@@ -41,11 +41,11 @@
               
               
 
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;overflow-y:auto;" >
+
     <div class="card">
        
           
-    <p:dataTable var="member" widgetvar="member" paginator="true" rows="6" sortMode="single" value="#{admin.viewJoin()}">
+    <p:dataTable style="width: 76rem; height: 35rem;position:fixed;top:120px;right:8px;overflow-y:auto;" var="member" widgetvar="member" paginator="true" rows="6" sortMode="single" value="#{admin.viewJoin()}">
        
        
 
@@ -60,7 +60,7 @@
         
         
         <p:column >          
-        <p:commandButton value="View" styleClass="ui-button-success" style="width:100px;height:50px;" action="#{admin.doApprove(member)}"/>
+        <p:commandButton value="View" icon="pi pi-eye" style="width:100px;height:50px;background-color:#4169E1;" action="#{admin.doApprove(member)}"/>
         </p:column>
 
     
@@ -69,15 +69,10 @@
     
 </div> 
 
-   
-
-</p:card>
-
-                 
-</div>
 <div>
 
 </div>
+        </div>
     </h:form>              
 </h:body>
   

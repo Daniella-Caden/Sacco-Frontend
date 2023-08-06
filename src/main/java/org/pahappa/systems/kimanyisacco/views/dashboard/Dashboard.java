@@ -2,6 +2,7 @@ package org.pahappa.systems.kimanyisacco.views.dashboard;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
@@ -173,21 +174,21 @@ System.out.println(userEmail);
 
 
     public void doTransaction() throws IOException {
-
-       
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        HttpSession session = (HttpSession) externalContext.getSession(false);
+   if(trans.getAmount()>499){
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    ExternalContext externalContext = facesContext.getExternalContext();
+     HttpSession session = (HttpSession) externalContext.getSession(false);
         
         // Retrieve the user's email from the session
-        String userEmail = (String) session.getAttribute("userName");
+    String userName = (String) session.getAttribute("userName");
     
         // Retrieve the associated Members entity from the database using the userEmail
-        Members m = memberImpl.getMemberByUsername(userEmail);
-        
-    if(trans.getAmount()>0){
+     Members m = memberImpl.getMemberByUsername(userName);
         // Make sure the member exists before proceeding
         if (m != null) {
+         Transactions t = transImpl.getPending(userName);
+        //  System.out.println(t.getAmount());
+            if((trans.getTransactionType().equals("withdraw")&& (t==null))||trans.getTransactionType().equals("deposit")){
             LocalDate localDateToStore = LocalDate.now();
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String formattedDate = localDateToStore.format(dateFormatter);
@@ -195,36 +196,60 @@ System.out.println(userEmail);
             trans.setMember(m); // Set the associated Members entity
             trans.setCreatedOn(formattedDate);
             
-            // if (trans.getTransactionType().equals("withdraw")) {
-            //     trans.setStatus("PENDING");
-            // } else {
-            //     trans.setStatus("APPROVED");
-            // }
-            
            boolean check = transImpl.createTransaction(trans);
            System.out.println("CHECK IS "+check);
 
            if(check){
+
+            if(trans.getTransactionType().equals("deposit")){
     
+            addFlashMessage(FacesMessage.SEVERITY_INFO, "Deposit Successful","You have successfully desposited UGX" + trans.getAmount());
+        }
+            else{
+              addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Request Submitted","Please wait for the request to be approved. You will receive a notification once the request is processed.");   
+                
+            }
             String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
             System.out.println("mybaseurl:" + context);
-            FacesContext.getCurrentInstance().getExternalContext().redirect(context + "/pages/dashboard/Dashboard.xhtml");}
+            FacesContext.getCurrentInstance().getExternalContext().redirect(context + "/pages/dashboard/Dashboard.xhtml");
+        }
+
             else{
-                
-                FacesContext.getCurrentInstance().addMessage("growl",
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdraw Request Failed",
-                    " You are requesting to withdraw an amount that is more than your account balance")); 
+                 FacesContext.getCurrentInstance().addMessage("growl",
+               new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdraw Request Failed",
+                   " You are requesting to withdraw an amount that is more than your account balance")); 
             }
+            // else{
+                
+            //     FacesContext.getCurrentInstance().addMessage("growl",
+            //     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdraw Request Failed",
+            //         " You are requesting to withdraw an amount that is more than your account balance")); 
+            // }
+
+
         } else {
+
+           FacesContext.getCurrentInstance().addMessage("growl",
+                new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdraw Request Failed",
+                    " You still have a pending withdraw request"));   
             
         }
     }
+}
     else{
         FacesContext.getCurrentInstance().addMessage("growl",
-        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Withdraw Request Failed",
-            "Please enter a valid value"));
+        new FacesMessage(FacesMessage.SEVERITY_ERROR, "Transaction failed",
+            "Please an amount of UGX 500 and above"));
     }
     }
+
+    private void addFlashMessage(FacesMessage.Severity severity, String summary, String detail) {
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    Flash flash = facesContext.getExternalContext().getFlash();
+    flash.setKeepMessages(true);
+    facesContext.addMessage("growl", new FacesMessage(severity, summary, detail));
+  }
+
     String userEmail;
     public void viewProfile() throws IOException{
     FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -277,6 +302,7 @@ String context = FacesContext.getCurrentInstance().getExternalContext().getReque
     public void doWithdraw(Transactions trans) throws IOException{
         System.out.println(trans.getAmount());
         transImpl.updateWithdraw(trans);
+        addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Successful","You have successfully withdrawn UGX" + trans.getAmount());
         String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
         System.out.println("mybaseurl:"+context);
         FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/dashboard/Dashboard.xhtml");   
@@ -298,6 +324,8 @@ String context = FacesContext.getCurrentInstance().getExternalContext().getReque
 
 
   }    
+
+ 
 
   public void changePassword() throws IOException{
 

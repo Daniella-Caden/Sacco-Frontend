@@ -114,6 +114,7 @@
 <f:view>
   <f:event type="preRenderView" listener="#{loginForm.display()}" />
     <h:form>
+      <p:growl id="growl" showDetail="true" sticky="false" />
         <div class="card-container">
             <ui:insert name="memberHeader">
                 <!-- Include the header content -->

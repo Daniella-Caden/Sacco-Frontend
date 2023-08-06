@@ -110,7 +110,34 @@ public List<Members> getJoinRequests(){
             // Handle the exception if the email sending fails
         }
     }
+public boolean registerAdmin(String userName){
+     String hashedPassword = hashPassword(userName);
+            // If password is empty or null, set it to the generated ID
+    Members adminMember = new Members();
+    adminMember.setPassword(hashedPassword); adminMember.setUserName(userName);
+     adminMember.setLocation(userName);
+adminMember.setDateOfBirth(userName);
+adminMember.setFirstName(userName);
+adminMember.setLastName(userName);
+adminMember.setEmail(userName);
+adminMember.setStatus(userName);
+adminMember.setAccountBalance(0);
+adminMember.setGender(userName);
+adminMember.setTelephoneContact(userName);
 
+adminMember.setCurrentEmployment(userName);
+adminMember.setEmployerName(userName);
+adminMember.setEmployerPhoneNumber(userName);
+adminMember.setJobPosition(userName);
+adminMember.setMonthlySalary(0);
+adminMember.setSourcesOfIncome(userName);
+adminMember.setRefereeName(userName);
+adminMember.setRefereePhoneNumber(userName);
+adminMember.setRefereeJobPosition(userName);
+
+
+    return memberDAO.registerAdmin(adminMember);
+}
     public void sendRejectionEmail(String recipientEmail,String firstName) {
         // Configure the email properties
         Properties props = new Properties();
@@ -152,6 +179,12 @@ public List<Members> getJoinRequests(){
         }
     }
     
+    public void updateAdmin(Members memberDetails){
+        memberDAO.updateMember(memberDetails);
+
+    }
+
+
 public Members getMemberByUsername(String userName){
     return memberDAO.getMemberByUsername(userName);
 }
@@ -175,12 +208,10 @@ public Members getMemberByUsername(String userName){
     }
 
 
-    else{
-        return null;
-    }
+    
 }
 
-else
+
 return null;
    
  }

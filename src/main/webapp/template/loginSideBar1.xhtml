@@ -13,20 +13,24 @@
 </h:head>
 
 <h:body>
+  <div class="grid">
+    <div class="col-3">
     <p:card style="width: 15rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;">
                 <div style="display: flex; flex-direction: column; height: 100%;">
                     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-                      <p:commandLink action="#{dashboard.viewProfile()}">
-                        <p:graphicImage library="images" name="profile2.png" alt="Profile Image" style="height: 100px; width: 100px;" />
-                      </p:commandLink>
+                      <p:commandLink action="#{dashboard.viewProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
+                        <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
+                    </p:commandLink>
+                    
                      
                            
       
                           
                     </div>
-                  <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1rem;margin-top: 30%; margin-bottom: 1rem;">
+                  <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1rem;top:200px; margin-bottom: 1rem;">
                     
-                    <div style="display: flex; align-items: center;margin-left:6%;" class="button-like-text" >
+                    <div style="display: flex; align-items: center;left:20px; justify-content: center;" class="button-like-text" >
+                    
                       Welcome,#{loginForm.m.firstName}
                     </div>
 
@@ -74,7 +78,7 @@
                 </div>
               </p:card>
               
-            
-      
+            </div>
+      </div>
     </h:body>
 </html>

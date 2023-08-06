@@ -22,8 +22,16 @@
   flex-wrap: wrap;
   gap: 1rem;
   position:relative;
-  top:120px;
-  left:100px;
+  top:60px;
+  left:150px;
+}
+.card-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position:relative;
+  top:140px;
+  left:150px;
 }
 .main--title{
   color: rgba(113, 99, 186, 255);
@@ -115,6 +123,7 @@
     <f:event type="preRenderView" listener="#{loginForm.display()}" />
 
     <h:form>
+      <p:growl id="growl" showDetail="true" sticky="false" />
         <div class="card-container">
             <ui:insert name="memberHeader">
                 <!-- Include the header content -->
@@ -176,6 +185,58 @@
         </div>
     </div>
 
+    
+    
+    <div class="card-wrap">
+      <div class="payment--card light-red">
+          <div class="card--header">
+              <div class="amount">
+                  <span class="amount--value">
+                      #{loginForm.memberNumber}
+                  </span>
+                  <span class="title">
+                       Total Savings
+                  </span>
+                  
+              </div>
+              
+              <p:graphicImage library="images" name="aboutUspng.png" alt="image not there" style="height: 100px; width: 100px;" />
+          </div>
+         
+      </div>
+      <div class="payment--card light-green">
+          <div class="card--header">
+              <div class="amount">
+                  <span class="amount--value">
+                      #{loginForm.joins}
+                  </span>
+                  <span class="title">
+                    Join Requests
+                  </span>
+                  
+              </div>
+              <p:graphicImage library="images" name="joinrequest.png" alt="image not there" style="height: 100px; width: 100px;" />
+              
+          </div>
+          
+      </div>
+      <div class="payment--card light-purple">
+          <div class="card--header">
+              <div class="amount">
+                <span class="amount--value">
+                  #{loginForm.withdraws}
+              </span>
+                  <span class="title">
+              Withdraw Requests
+                  </span>
+                 
+              </div>
+              <p:graphicImage library="images" name="withdraw.png" alt="image not there" style="height: 100px; width: 100px;" />
+              
+          </div>
+          
+      </div>
+  </div>
        
 <!-- <div class="card">
     <p:dataTable var="user" value="#{userView.users}">

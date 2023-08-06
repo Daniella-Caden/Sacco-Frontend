@@ -22,12 +22,18 @@ public class TransactionDAO {
 
        boolean bal = true;
         Transaction transaction = null;
+        boolean transactionSuccess = false;
+        Members member = trans.getMember();
+        Session session = SessionConfiguration.getSessionFactory().openSession();
+       
+   
+     
         try{
             double accountBal=0;
-            Session session = SessionConfiguration.getSessionFactory().openSession();
+          
             transaction = session.beginTransaction();
 
-            Members member = trans.getMember();
+       
 
             System.out.println("Current:"+member.getAccountBalance());
             System.out.println("Current:"+member.getUserName());
@@ -36,25 +42,31 @@ public class TransactionDAO {
 
             if(trans.getTransactionType().equals("deposit")){
                 trans.setStatus("APPROVED");
-                 member.setAccountBalance(member.getAccountBalance()+trans.getAmount());
-                    accountBal=member.getAccountBalance();
-                 System.out.println("New:"+accountBal);
+                
                  
-                 updateAccountBalance(accountBal,member.getUserName());
+                
                  session.save(trans);
-                  transaction.commit();
+                 transactionSuccess = true;
+                 
                  }
 
                  else{
+       
+
                     if(trans.getAmount()>=member.getAccountBalance()){
                         bal = false;
+                        
                        
                     }
 
+                   
                     else{
+                        
                         trans.setStatus("PENDING");
                          session.save(trans);
-                  transaction.commit();
+                        
+                 
+                 
                     }
 
                     
@@ -71,10 +83,32 @@ public class TransactionDAO {
 
             
         }catch(Exception ex){
+           
+            ex.printStackTrace();
+        }
+
+        try{
+if(transactionSuccess){
+    Members m = (Members) session.get(Members.class,member.getUserName());
+
+   
+ 
+    m.setAccountBalance(member.getAccountBalance()+trans.getAmount());
+
+    
+    session.update(m);
+
+        }}catch(Exception e){
+            System.out.println("error");
+        }
+
+        try{
+            transaction.commit();
+        }catch(Exception e){
             if(transaction!=null){
                 transaction.rollback();
             }
-            ex.printStackTrace();
+            System.out.println("error");
         }
 return bal;
         
@@ -115,6 +149,28 @@ return bal;
 }
 
 
+
+public Transactions getPending(String userName){
+    
+    try {
+        Session session = SessionConfiguration.getSessionFactory().openSession();
+
+        Criteria criteria = session.createCriteria(Transactions.class);
+        // Add restriction to filter by transactionType
+        criteria.add(Restrictions.eq("transactionType", "withdraw"));
+        criteria.add(Restrictions.eq("status", "PENDING"));
+        
+
+        // Create an alias for the member property and use it to add a restriction for userName
+        criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
+        criteria.add(Restrictions.eq("m.userName", userName));
+
+        return (Transactions)criteria.uniqueResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 
 
 

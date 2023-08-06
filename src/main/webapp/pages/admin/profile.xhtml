@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+
+<h:head>
+   <f:facet name="first">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+      <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+      <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
+   </f:facet>
+
+
+</h:head>
+
+
+<h:body>
+   <div class="card flex justify-content-center">
+
+      <f:view>
+         <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
+            <h:form>
+ 
+
+            <h1 style="text-align: center; color:#4169E1">My Profile</h1>
+                  <div>
+                     <h3 style="color:#4169E1">Personal Details</h3>
+                  </div>
+
+            <div class="formgrid grid">
+               <div class="field col-12 md:col-6 ">
+                  <label for="firstname6">First Name</label>
+                  <p:inputText id="firstname6" type="text" value="#{admin.memberDetails.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+               </div>
+               <div class="field col-12 md:col-6 ">
+                  <label for="lastname6">Last Name</label>
+                  <p:inputText id="lastname6" value="#{admin.memberDetails.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+               </div>
+               
+               <div class="field col-12">
+                  <div class="field">
+                     <label for="email">Email</label>
+                     <p:inputText id="email" type="text" value="#{admin.memberDetails.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
+                  </div>
+               </div>
+               <div class="field col-12 md:col-6">
+                  <label for="city">Telephone Contact</label>
+                  <p:inputMask mask="9999999999" id="city" type="text" value="#{admin.memberDetails.telephoneContact}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                
+            </div>
+            </div>
+       
+
+            <div class="formgrid grid">
+                <div class="field col-12 md:col-6">
+                    <p:commandButton value="Change Password" oncomplete="PF('changePasswordDialog').show()"/>
+                     <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+     
+                   </div>
+
+            </div>
+            <p:dialog id="changePasswordDialog" widgetVar="changePasswordDialog" header="Change Password" modal="true">
+               <!-- Content of the pop-up -->
+               <!-- Input fields for original password, new password, and password confirmation -->
+               <div class="card flex justify-content-center">
+
+                  
+                     <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
+                        <div class="formgrid grid">
+                           <div class="field col-12 md:col-6 ">
+               <label for="originalPassword">Original Password</label> <br/>
+               <p:password id="originalPassword" value="#{admin.oldPassword}" toggleMask="true" redisplay="true"/>
+       </div>
+          
+       <div class="field col-12 md:col-6 ">
+               <label for="newPassword">New Password</label><br/>
+               <p:password id="newPassword" value="#{admin.newPassword}" toggleMask="true" redisplay="true"/>
+               </div>
+               <div class="field col-12 md:col-6 ">
+               <label for="confirmPassword">Confirm Password</label><br/>
+               <p:password id="confirmPassword" value="#{admin.confirmPassword}" toggleMask="true" redisplay="true"/>
+               </div>
+               <!-- Command button to submit the form and change the password -->
+               
+               </div>
+               <p:commandButton value="Save Changes" action="#{admin.adminPassword()}" update="@form" />
+               </div>
+               </div>   
+
+           </p:dialog>
+
+            <div class="formgrid grid">
+            <div class="field col-12 md:col-6">
+               <p:commandButton value="Save Changes" action="#{admin.updateAdmin()}"/>
+                <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+
+              </div>
+
+              <div class="field col-12 md:col-6">
+              
+                  <p:button value="Cancel" outcome="#{navigation.adminDashboard}"/> 
+ 
+               </div>
+
+
+
+              </div>
+         </h:form>
+         </div>
+
+      </f:view>
+   </div>
+
+
+</h:body>
+
+</html>

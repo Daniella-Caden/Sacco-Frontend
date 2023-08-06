@@ -143,11 +143,17 @@
 
 
             <div class="field col-12 md:col-6">
-               <p:commandButton  id="applybutton"  value="Apply" action="#{registration.doRegistration()}" update="growl"/>
+               <p:commandButton  id="applybutton"  value="Apply" action="#{registration.doRegistration()}" update="growl">
+                 
+               </p:commandButton>
                 <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
 
               </div>
 
+              <p:confirmPopup global="true">
+             
+               <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
+           </p:confirmPopup>
               
          </h:form>
          </div>

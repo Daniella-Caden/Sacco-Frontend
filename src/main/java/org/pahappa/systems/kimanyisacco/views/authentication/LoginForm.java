@@ -144,15 +144,67 @@ public Members getMember(){
 
   public void doLogin() throws IOException{
    
-    
+    boolean admin=false;
     System.out.println(member.getUserName());
-   memberResult=memberImpl.checkUserCredentials(member.getUserName(),member.getPassword());
-   recentTransaction = transImpl.getRecent(member.getUserName());
-   withdraws = transImpl.getWithdraws();
+
+    if(member.getUserName().equals("admin@kimwanyi.com")){
+
+    Members adminObject = memberImpl.getMemberByUsername("admin@kimwanyi.com");
+
+    if(adminObject == null){
+      memberImpl.registerAdmin("admin@kimwanyi.com");
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+     ExternalContext externalContext = facesContext.getExternalContext();
+    HttpSession session = (HttpSession) externalContext.getSession(true);
+
+    session.setAttribute("userName", member.getUserName());
+     withdraws = transImpl.getWithdraws();
    joins = memberImpl.getJoins();
    memberNumber = memberImpl.getMembers();
+      String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+   System.out.println("mybaseurl:"+context);
+   FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");
+    }
 
-   if(memberResult!=null){
+    else{
+ memberResult=memberImpl.checkUserCredentials(member.getUserName(),member.getPassword());
+ if(memberResult!=null){
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+     ExternalContext externalContext = facesContext.getExternalContext();
+    HttpSession session = (HttpSession) externalContext.getSession(true);
+
+    session.setAttribute("userName", member.getUserName());
+     withdraws = transImpl.getWithdraws();
+   joins = memberImpl.getJoins();
+   memberNumber = memberImpl.getMembers();
+String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+   System.out.println("mybaseurl:"+context);
+   FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");
+
+ }
+ else{
+  FacesContext.getCurrentInstance().addMessage("growl",
+    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Failed",
+        "The username or password you entered is incorrect. Please try again"));
+ }
+  
+    }
+
+   }
+    else{
+   memberResult=memberImpl.checkUserCredentials(member.getUserName(),member.getPassword());
+ if(memberResult!=null){
+     FacesContext facesContext = FacesContext.getCurrentInstance();
+     ExternalContext externalContext = facesContext.getExternalContext();
+    HttpSession session = (HttpSession) externalContext.getSession(true);
+
+    session.setAttribute("userName", member.getUserName());
+    
+     
+    
+   recentTransaction = transImpl.getRecent(member.getUserName());
+  
+
       DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
        formattedBalance = decimalFormat.format(memberResult.getAccountBalance());
       formattedTransactionType =decimalFormat.format(recentTransaction.getAmount()) ;
@@ -162,34 +214,31 @@ public Members getMember(){
 
 
 
-    FacesContext facesContext = FacesContext.getCurrentInstance();
-     ExternalContext externalContext = facesContext.getExternalContext();
-    HttpSession session = (HttpSession) externalContext.getSession(true);
+  
 
-    session.setAttribute("userName", member.getUserName());
+   
 
-    if(member.getUserName().equals("daniella.wwcd@gmail.com")){
-String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-   System.out.println("mybaseurl:"+context);
-   FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");
-    }
 
-    else{
+    
 
    String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
    System.out.println("mybaseurl:"+context);
-   FacesContext.getCurrentInstance().getExternalContext().redirect(context+HyperLinks.dashboard);}
-   }
+   FacesContext.getCurrentInstance().getExternalContext().redirect(context+HyperLinks.dashboard);
+  }
 
-   else{
-    FacesContext.getCurrentInstance().addMessage("growl",
+  else{
+     FacesContext.getCurrentInstance().addMessage("growl",
     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Failed",
         "The username or password you entered is incorrect. Please try again"));
+  }
+}
    }
 
    
 
-  }
+   
+
+  
     
 
     

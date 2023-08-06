@@ -107,6 +107,7 @@ public class Registration {
     facesContext.addMessage("growl", new FacesMessage(severity, summary, detail));
   }
 
+
   public void doRegistration() throws IOException {
 
     if(isValidEmail(member.getEmail())){
@@ -119,13 +120,9 @@ public class Registration {
 
     if (success) {
 
-       //addFlashMessage(FacesMessage.SEVERITY_INFO, "Registration Successful","Congratulations! You have been successfully registered.");
-      // FacesContext.getCurrentInstance().addMessage("growl",
-      //     new FacesMessage(FacesMessage.SEVERITY_INFO, "Registration Successful",
-      //         "Please enter a different email address."));
-      // PrimeFaces.current().ajax().update("form:growl");
-    
-        String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+      addFlashMessage(FacesMessage.SEVERITY_INFO, "Application Submitted Successfully","Thank you for submitting your application. Your application has been successfully received. Please wait for an email notification regarding the approval or rejection of your application. We will get back to you as soon as possible.");
+          
+       String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
        System.out.println("mybaseurl:" + context);
        FacesContext.getCurrentInstance().getExternalContext().redirect(context + "/pages/log-in/home.xhtml");
     }

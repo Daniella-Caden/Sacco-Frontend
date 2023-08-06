@@ -27,16 +27,99 @@
 <h:body class ="body">
     
 <f:view>
-  <!-- <f:event type="preRenderView" listener="#{loginForm.logOut()}" /> -->
-    <h:form>
-      
+      <h:form>
+      <p:growl id="growl" showDetail="true" sticky="false" />
         <div class="card-container">
+            <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <h:outputStylesheet name="css/App.css"/>
+      
+</h:head>
+
+<h:body>
+    <p:card style="width: 15rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;">
+                <div style="display: flex; flex-direction: column; height: 100%;">
+                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
+                      <p:commandLink action="#{dashboard.viewProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
+                        <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
+                    </p:commandLink>
+                    
+                     
+                           
+      
+                          
+                    </div>
+                  <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1rem;top:200px; margin-bottom: 1rem;">
+                    
+                    <div style="display: flex; align-items: center;left:20px; justify-content: center;" class="button-like-text" >
+                    
+                      Welcome,#{loginForm.m.firstName}
+                    </div>
+
+                    <span style="display: flex; align-items: center;">
+                      <p:graphicImage library="images" name="home.png" alt="image not there" style="height: 50px; width: 50px;" />
+                      <p:link outcome="#{navigation.dashboard}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Dashboard</p:link>
+                    </span>
+              
+                    <span style="display: flex; align-items: center;">
+                      <p:graphicImage library="images" name="transaction.png" alt="image not there" style="height: 50px; width: 50px;" />
+                      <p:link outcome="#{navigation.transaction}" style="background: none;
+                      border: none;
+                      color: #4169E1 ;
+                      cursor: pointer;
+                      text-decoration: none;
+                      transition: color 0.3s;
+                      font-size: 18px;">Make a transaction</p:link>
+
+                    </span>
+              
+                   
+                    <span style="display: flex; align-items: center;">
+                        <p:graphicImage library="images" name="history.png" alt="image not there" style="height: 50px; width: 50px;" />
+                        <p:link outcome="#{navigation.history}" style="background: none;
+                        border: none;
+                        color: #4169E1 ;
+                        cursor: pointer;
+                        text-decoration: none;
+                        transition: color 0.3s;
+                        font-size: 18px;">Transaction History</p:link>
+                       
+
+                      </span>
+
+                      
+                  </div>
+              
+                  
+                </div>
+              </p:card>
+              
             
+      
+    </h:body>
+</html>
+
           <ui:insert name="memberSideBar">
             <!-- Include the sidebar content -->
             <ui:include src="/template/memberSideBar.xhtml" />
         </ui:insert> 
 
+        
+          <div class="col-9">
     <p:card class="card-2" style="border-radius: 8%;" >
   <div class="card-content">
     
@@ -62,7 +145,8 @@
    
   </div>
 </p:card>
-
+          </div>
+        </div>
                  
 </div>
 

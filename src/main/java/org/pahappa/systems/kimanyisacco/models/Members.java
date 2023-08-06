@@ -207,7 +207,7 @@ public class Members {
         this.monthlySalary = monthlySalary;
     }
 
-    @Column(name = "sourcesOfIncome", nullable = false)
+    @Column(name = "sourcesOfIncome", nullable = false) 
     public String getSourcesOfIncome() {
         return sourcesOfIncome;
     }

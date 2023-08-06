@@ -15,10 +15,14 @@ import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.pie.PieChartDataSet;
 import org.primefaces.model.charts.pie.PieChartModel;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
+import javax.servlet.http.HttpSession;
 
 import org.pahappa.systems.kimanyisacco.controllers.HyperLinks;
 import org.pahappa.systems.kimanyisacco.models.Members;
@@ -33,10 +37,37 @@ import org.pahappa.systems.kimanyisacco.services.UserImpl;
 public class AdminDashboard implements Serializable{
 private Members member;
 private Members memberResult; 
+private Members memberDetails;
 private Transactions memberTransaction;
 private List<Members> members;
 private List<Transactions> transact;
 private PieChartModel pieModel;
+private  String oldPassword;
+private String newPassword;
+private String confirmPassword;
+public String getOldPassword() {
+    return oldPassword;
+}
+
+public void setOldPassword(String oldPassword) {
+    this.oldPassword = oldPassword;
+}
+
+public String getNewPassword() {
+    return newPassword;
+}
+
+public void setNewPassword(String newPassword) {
+    this.newPassword = newPassword;
+}
+
+public String getConfirmPassword() {
+    return confirmPassword;
+}
+
+public void setConfirmPassword(String confirmPassword) {
+    this.confirmPassword = confirmPassword;
+}
 
 public PieChartModel getPieModel(){
   return pieModel;
@@ -101,11 +132,19 @@ public Members getMember(){
   public void setMemberResult(Members MemberResult) {
       this.memberResult = memberResult;
   }
+  public Members getMemberDetails() {
+    return memberDetails;
+}
+
+public void setMemberDetails(Members memberDetails) {
+    this.memberDetails = memberDetails;
+}
 
  
     public AdminDashboard(){
         this.member=new Members();
         this.memberResult=new Members();
+        this.memberDetails = new Members();
         this.memberTransaction=new Transactions();
         createPieModel();
         
@@ -156,10 +195,17 @@ public Members getMember(){
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/approve.xhtml");
   }
 
+   private void addFlashMessage(FacesMessage.Severity severity, String summary, String detail) {
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    Flash flash = facesContext.getExternalContext().getFlash();
+    flash.setKeepMessages(true);
+    facesContext.addMessage("growl", new FacesMessage(severity, summary, detail));
+  }
   public void Approve(String userName,String firstName) throws IOException{
     System.out.println(userName);
     memberImpl.updateStatus(userName,"APPROVED");
     memberImpl.sendApprovalEmail(userName,firstName);
+    addFlashMessage(FacesMessage.SEVERITY_INFO, "Member Approved and Notified","The membership application for the approved member has been successfully processed. An email notification has been sent to the member with further details");
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   
@@ -170,11 +216,46 @@ public Members getMember(){
     System.out.println(userName);
     memberImpl.updateStatus(userName,"REJECTED");
     memberImpl.sendRejectionEmail(userName,firstName);
+    addFlashMessage(FacesMessage.SEVERITY_INFO, "Member Rejected","The membership application for the rejected member has been processed. An email notification has been sent to the member informing them about the rejection");
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   
 
   }
+
+   String userEmail;
+    public void adminProfile() throws IOException{
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+    ExternalContext externalContext = facesContext.getExternalContext();
+    HttpSession session = (HttpSession) externalContext.getSession(false);
+        
+        // Retrieve the user's email from the session
+    userEmail = (String) session.getAttribute("userName");
+
+    memberDetails = memberImpl.getMemberByUsername(userEmail); 
+String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+            System.out.println("mybaseurl:" + context);
+            FacesContext.getCurrentInstance().getExternalContext().redirect(context + "/pages/admin/profile.xhtml");
+
+
+        
+    }
+
+    public void adminPassword() throws IOException{
+      FacesContext facesContext = FacesContext.getCurrentInstance();
+         ExternalContext externalContext = facesContext.getExternalContext();
+         HttpSession session = (HttpSession) externalContext.getSession(false);
+         String userEmail = (String) session.getAttribute("userName");
+         System.out.println(oldPassword);
+        System.out.println(newPassword);
+        System.out.println(confirmPassword);
+      memberImpl.changePassword(oldPassword,newPassword,confirmPassword,"admin@kimwanyi.com");
+     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Password changes saved successfully!", null);
+         FacesContext.getCurrentInstance().addMessage(null, message);
+       String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+         System.out.println("mybaseurl:"+context);
+         FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/profile.xhtml"); 
+   }
 
   public List<Transactions> viewRequests() throws IOException{
     
@@ -200,9 +281,22 @@ public Members getMember(){
 
   }
 
+  public void updateAdmin() throws IOException{
+    memberImpl.updateAdmin(memberDetails);
+
+    String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+   System.out.println("mybaseurl:"+context);
+   FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");
+  }
+
   public void approveWithdrawal(String userName,int id,String decision) throws IOException{
     System.out.println(userName);
     transImpl.updateStatus(id,decision);
+    if(decision.equals("APPROVE")){
+     addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Request Approved","The withdrawal request has been successfully approved.");}
+     else{
+       addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Request Rejected","The withdrawal request has been rejected.");
+     }
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   

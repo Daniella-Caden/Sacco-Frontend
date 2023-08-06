@@ -19,6 +19,11 @@ public class TransactionsImpl{
    
         
     }
+
+    public Transactions getPending(String userName){
+      return transDAO.getPending(userName);
+    }
+    
   public int getWithdraws(){
     return (transDAO.getWithdrawalRequests()).size();
   }
