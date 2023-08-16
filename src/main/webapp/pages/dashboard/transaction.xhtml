@@ -1,113 +1,103 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes"/>
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-  
 </h:head>
-<ui:insert name="memberHeader">
-  <!-- Include the header content -->
-  <ui:include src="/template/memberHeader.xhtml" />
-</ui:insert>
-
-                    
-                    
-             
-  
-
-<h:body style ="background-color: rgb(252, 250, 250);">
-    
-
-    
-        <div class="card-container">
-            
-              
-            <ui:insert name="memberHeader">
+<h:body>
+    <f:event type="preRenderView" listener="#{loginForm.checkSessionValidity()}" />
+    <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+        <div id="header" class="grid col-12 ui-card">
+            <ui:insert name="header">
                 <!-- Include the header content -->
-                <ui:include src="/template/loginSideBar1.xhtml" />
-              </ui:insert>
-                  
-              
-              
+                <ui:include src="/template/memberHeader.xhtml"/>
+            </ui:insert>
 
-          
-              
-              
+        </div>
 
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
-    <h1 style="text-align: center; color:#4169E1">Transaction</h1>
-   <div class="card flex justify-content-center">
-
-      <f:view>
-         <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
-            <h:form>
-
-            <p:growl id="growl" showDetail="true" sticky="false" />
-                  
-
-            <div class="formgrid grid">
-               <div class="field col-12 md:col-6 ">
-                  <h:outputLabel for="firstname6" value="Amount"/>
-                  <p:inputText value="#{dashboard.trans.amount}" id="firstname6"  class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
-               </div>
-              
-               
-               
-               
-               <div class="field col-12 md:col-3">
-                  <h:outputLabel for="state" value="Type of Transaction"/>
-                  <h:selectOneMenu id="state" value="#{dashboard.trans.transactionType}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto">
-                     <f:selectItem itemValue="deposit" itemLabel="Deposit"/>
-                     <f:selectItem itemValue="withdraw" itemLabel="Withdraw"/>
-        
-                  </h:selectOneMenu>
-               </div>
-
-
+        <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+            <div id="side-bar" class=" grid col-2 ui-card border-round-3xl">
+                <ui:insert name="memberSideBar">
+                    <ui:include src="/template/loginSideBar1.xhtml"/>
+                </ui:insert>
 
             </div>
 
-               <p:divider/>
-            
-            <div class="field col-12 md:col-6">
-               <p:commandButton value="Submit" style="background-color:#4169E1" action="#{dashboard.doTransaction()}" update="growl">
-                  <p:confirm type="popup" header="Confirmation" message="Are you sure you want to make this transaction?" icon="pi pi-exclamation-triangle"/>
-               </p:commandButton>
-                <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+            <div id="menu" class="grid col ui-card border-round-3xl flex align-items-center flex-column gap-4">
 
-              </div>
-              <p:confirmPopup global="true">
-               <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-               <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
-           </p:confirmPopup>
-         </h:form>
-         </div>
+                <div>
+                    <h1 style="text-align: center; color:#4169E1">Transaction</h1>
+                </div>
 
-      </f:view>
-   </div>
+                <div class="col-8 w-9 border-50 mt-8  surface-ground shadow-1 p-2 border-round-sm">
+                    <h:form>
 
-</p:card>
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
 
-                 
-</div>
-<div>
 
-</div>
-               
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 " >
+                                <h:outputLabel for="firstname6" value="Amount"/>
+                                <p:inputText value="#{transaction.trans.amount}" id="firstname6"
+                                             class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                            </div>
+
+
+                            <div class="field col-12 md:col-3">
+                                <h:outputLabel for="state" value="Type of Transaction"/>
+                                <h:selectOneMenu id="state" value="#{transaction.trans.transactionType}"
+                                                 class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary"
+                                                 style="appearance: auto">
+                                    <f:selectItem itemValue="DEPOSIT" itemLabel="Deposit"/>
+                                    <f:selectItem itemValue="WITHDRAW" itemLabel="Withdraw"/>
+
+                                </h:selectOneMenu>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="field col-12 md:col-6">
+                            <p:commandButton value="Submit" style="background-color:#4169E1"
+                                             action="#{transaction.doTransaction()}" update="growl">
+                                <p:confirm type="popup" header="Confirmation"
+                                           message="Are you sure you want to make this transaction?"
+                                           icon="pi pi-exclamation-triangle"/>
+                            </p:commandButton>
+                            <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+
+                        </div>
+                        <p:confirmPopup global="true">
+                            <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes"/>
+                        </p:confirmPopup>
+                    </h:form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
 </h:body>
-  
-
 </html>

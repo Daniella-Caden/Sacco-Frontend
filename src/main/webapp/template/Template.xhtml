@@ -12,40 +12,58 @@
 </h:head>
 
 <h:body>
+    <!-- <div>
     <ui:insert name="header">
-        <!-- Include the header content -->
+        
         <ui:include src="../template/Header.xhtml" />
     </ui:insert>
+    </div> -->
+    
+    <div class="fixed p-col-12 w-full ">
     <ui:insert name="memberHeader">
-        <!-- Include the header content -->
         <ui:include src="../template/memberHeader.xhtml" />
     </ui:insert>
-
+</div>
+<!-- <div>
     <ui:insert name="memberSideBar">
-        <!-- Include the sidebar content -->
         <ui:include src="../template/memberSideBar.xhtml" />
     </ui:insert>
-
-    <ui:insert name="SideBar1">
+</div> -->
+<!-- <div>
+    <ui:insert name="memberSideBar">
+    
+        <ui:include src="../template/memberSideBar.xhtml" />
+    </ui:insert>
+</div> -->
+<div class="p-grid p-col-12  mt-8" style="display:flex;">
+<div class="p-col-3">
+    <ui:insert name="SideBar1" class="p-col-12">
         <!-- Include the sidebar content -->
         <ui:include src="../template/loginSideBar1.xhtml" />
     </ui:insert>
-    <ui:insert name="adminSideBar">
-        <!-- Include the sidebar content -->
-        <ui:include src="../template/adminSidebar.xhtml" />
-    </ui:insert>
-    <ui:insert name="adminHeader">
-        <!-- Include the sidebar content -->
-        <ui:include src="../template/adminHeader.xhtml" />
-    </ui:insert>
-    <div id="main">
-        <!-- Main content of the page goes here -->
-        <ui:insert name="content"></ui:insert>
-    </div>
+</div>
+<div class="p-col-9 ">
+     <ui:insert name="content"  class="p-col-12"> 
+         <ui:include src="../template/content.xhtml" /> 
+     </ui:insert>
+</div>
+</div>
 
-    <footer>
-        <!-- Footer content goes here -->
-    </footer>
+    <!-- <ui:insert name="adminSideBar"> -->
+        <!-- Include the sidebar content -->
+        <!-- <ui:include src="../template/adminSidebar.xhtml" /> -->
+    <!-- </ui:insert> -->
+
+    <!-- <ui:insert name="adminHeader"> -->
+        <!-- Include the sidebar content -->
+        <!-- <ui:include src="../template/adminHeader.xhtml" /> -->
+    <!-- </ui:insert> -->
+    <!-- <div id="main"> -->
+        <!-- Main content of the page goes here -->
+        <!-- <ui:insert name="content"></ui:insert> -->
+    <!-- </div> -->
+
+
 </h:body>
 
 </html>

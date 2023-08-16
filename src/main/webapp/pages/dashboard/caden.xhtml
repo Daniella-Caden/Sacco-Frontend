@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
+    </f:facet>
+</h:head>
+<h:body>
+    <f:view>
+        <f:event type="preRenderView" listener="#{loginForm.memberDisplay()}" />
+        <f:event type="preRenderView" listener="#{loginForm.checkSessionValidity()}" />
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="false" />
+            <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+                <div id="header" class="grid col-12 ui-card">
+                    <ui:insert name="header">
+                        <!-- Include the header content -->
+                        <ui:include src="/template/memberHeader.xhtml" />
+                    </ui:insert>
+
+                </div>
+
+                <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+                    <div id="side-bar" class="grid col-2 ui-card border-round-3xl">
+                        <ui:insert name="memberSideBar">
+                            <ui:include src="/template/loginSideBar1.xhtml" />
+                        </ui:insert>
+
+                    </div>
+
+                    <div id="menu" class="grid col ui-card border-round-3xl">
+                        <h1 style="color:#4169E1;text-align: center;">Notifications</h1>
+
+                        <p:dataTable var="message" value="#{notifications.result}">
+
+
+                            <!-- <p:column>
+                              <div class="date-sent">Sent on July 15, 2023</div>
+                    </p:column> -->
+                            <p:column>
+                                <div style="display:flex;gap: 10px;">
+                                    <div class="message-card">
+                                        <div class="message">
+                                            #{message.notifications}
+                                        </div>
+                                        <div class="date-sent">Sent on #{message.createdOn}</div>
+                                    </div>
+                                    <p:commandButton value="Withdraw" styleClass="ui-button-success" style="width:100px;height:50px;"  action="#{dashboard.doWithdraw(message)}"  rendered="#{message.status ne 'REJECTED'}"/>
+                                </div>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </f:view>
+</h:body>
+</html>

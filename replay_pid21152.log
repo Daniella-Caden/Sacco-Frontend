@@ -54,7 +54,7 @@ instanceKlass com/google/inject/Scope
 instanceKlass org/aopalliance/intercept/MethodInterceptor
 instanceKlass org/aopalliance/intercept/Interceptor
 instanceKlass org/aopalliance/aop/Advice
-instanceKlass com/google/inject/MembersInjector
+instanceKlass com/google/inject/MemberInjector
 instanceKlass com/google/inject/spi/Message
 instanceKlass com/google/inject/spi/Element
 instanceKlass com/google/inject/binder/AnnotatedConstantBindingBuilder
@@ -958,7 +958,7 @@ instanceKlass java/lang/ref/FinalReference
 instanceKlass java/lang/ref/WeakReference
 instanceKlass java/lang/ref/SoftReference
 ciInstanceKlass java/lang/ref/Reference 1 1 159 10 9 10 9 9 100 10 10 9 9 10 10 10 9 9 100 10 10 10 7 10 10 10 7 8 10 7 10 10 10 7 10 10 7 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 100 1 1 100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 7 1 1 1 1 1 1 1 1 1 7 1 1 1 1 12 12 12 12 12 1 12 12 12 12 12 12 12 12 12 1 12 12 1 12 12 12 1 1 12 1 12 12 12 1 7 12 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-staticfield java/lang/ref/Reference processPendingLock Ljava/lang/Object; java/lang/Object
+staticfield java/lang/ref/Reference processStatus.PENDINGLock Ljava/lang/Object; java/lang/Object
 instanceKlass sun/util/locale/provider/LocaleResources$ResourceReference
 instanceKlass sun/util/resources/Bundles$BundleReference
 instanceKlass org/eclipse/sisu/inject/MildKeys$Soft

@@ -9,76 +9,114 @@
 >
 <h:head>
     <h:outputStylesheet name="css/App.css"/>
-      
+    <style>
+        .button-like-text{
+            background: none;
+            border: none;
+            color: #4169E1 ;
+            cursor: pointer;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
+
+    </style>
+
 </h:head>
 
 <h:body>
-  <div class="grid">
-    <div class="col-3">
-    <p:card style="width: 15rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;">
-                <div style="display: flex; flex-direction: column; height: 100%;">
-                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-                      <p:commandLink action="#{dashboard.viewProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
-                        <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
-                    </p:commandLink>
-                    
-                     
-                           
-      
-                          
-                    </div>
-                  <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1rem;top:200px; margin-bottom: 1rem;">
-                    
-                    <div style="display: flex; align-items: center;left:20px; justify-content: center;" class="button-like-text" >
-                    
-                      Welcome,#{loginForm.m.firstName}
-                    </div>
+    <div class="col-6 mt-5 ml-3 ">
+        <div class="flex align-items-center ml-8">
+        <p:commandLink action="#{memberProfile.viewProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
+            <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
+        </p:commandLink>
+        </div>
+        <div class="flex align-items-center mt-2"   style="
+              background: none;
+              border: none;
+              color: #4169e1;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 30px;
+            ">
 
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="home.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.dashboard}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Dashboard</p:link>
-                    </span>
-              
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="transaction.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.transaction}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Make a transaction</p:link>
+            Welcome,#{loginForm.m.firstName}
+        </div>
+        <div class="flex align-items-center mt-7">
 
-                    </span>
-              
-                   
-                    <span style="display: flex; align-items: center;">
-                        <p:graphicImage library="images" name="history.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <p:link outcome="#{navigation.history}" style="background: none;
-                        border: none;
-                        color: #4169E1 ;
-                        cursor: pointer;
-                        text-decoration: none;
-                        transition: color 0.3s;
-                        font-size: 18px;">Transaction History</p:link>
-                       
 
-                      </span>
+            <p:graphicImage
+                    library="images"
+                    name="home.png"
+                    alt="image not there"
+                    height="50px"
+            />
 
-                      
-                  </div>
-              
-                  
-                </div>
-              </p:card>
-              
-            </div>
-      </div>
-    </h:body>
+            <p:link
+                    outcome="#{navigation.dashboard}"
+                    style="
+              background: none;
+              border: none;
+              color: #4169e1;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 30px;
+            "
+            >Dashboard</p:link
+            > </div>
+
+        <div class="flex align-items-center mt-5">
+            <p:graphicImage
+                    library="images"
+                    name="transaction.png"
+                    alt="image not there"
+                    height="50px"
+            />
+            <p:link
+                    outcome="#{navigation.transaction}"
+                    style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+            >Make a transaction</p:link
+            >
+
+        </div>
+
+        <div class="flex align-items-center mt-5">
+
+            <p:graphicImage
+                    library="images"
+                    name="history.png"
+                    alt="image not there"
+                    height="50px"
+            />
+            <p:link
+                    outcome="#{navigation.history}"
+                    style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+            >Transaction History</p:link
+            >
+        </div>
+
+
+
+
+
+    </div>
+</h:body>
 </html>

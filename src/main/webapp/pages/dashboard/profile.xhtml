@@ -25,7 +25,7 @@
       <f:view>
          <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
             <h:form>
-
+               <p:growl id="growl" showDetail="true" sticky="false" />
             <h1 style="text-align: center; color:#4169E1">My Profile</h1>
                   <div>
                      <h3 style="color:#4169E1">Personal Details</h3>
@@ -34,35 +34,35 @@
             <div class="formgrid grid">
                <div class="field col-12 md:col-6 ">
                   <label for="firstname6">First Name</label>
-                  <p:inputText id="firstname6" type="text" value="#{dashboard.memberDetails.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
+                  <p:inputText id="firstname6" type="text" value="#{memberProfile.memberDetails.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
                </div>
                <div class="field col-12 md:col-6 ">
                   <label for="lastname6">Last Name</label>
-                  <p:inputText id="lastname6" value="#{dashboard.memberDetails.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
+                  <p:inputText id="lastname6" value="#{memberProfile.memberDetails.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
                </div>
                <div class="field col-12 md:col-6">
                   <label for="location">Location</label>
-                  <p:inputText id="location" type="text" value="#{dashboard.memberDetails.location}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  <p:inputText id="location" type="text" value="#{memberProfile.memberDetails.location}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
       
                </div>
                <div class="field col-12 md:col-3">
                   <label for="date">Date of Birth</label>
-                  <p:inputText id="date" type="date" value="#{dashboard.memberDetails.dateOfBirth}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto" disabled="true"/>
+                  <p:inputText id="date" type="date" value="#{memberProfile.memberDetails.dateOfBirth}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" style="appearance: auto" disabled="true"/>
                </div>
                <div class="field col-12">
                   <div class="field">
                      <label for="email">Email</label>
-                     <p:inputText id="email" type="text" value="#{dashboard.memberDetails.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
+                     <p:inputText id="email" type="text" value="#{memberProfile.memberDetails.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
                   </div>
                </div>
                <div class="field col-12 md:col-6">
                   <label for="city">Telephone Contact</label>
-                  <p:inputMask mask="9999999999" id="city" type="text" value="#{dashboard.memberDetails.telephoneContact}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                  <p:inputMask mask="9999999999" id="city" type="text" value="#{memberProfile.memberDetails.telephoneContact}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                 
             </div>
                <div class="field col-12 md:col-3">
                   <label for="state">Gender</label>
-                  <p:inputText id="state" value="#{dashboard.memberDetails.gender}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" disabled="true" />
+                  <p:inputText id="state" value="#{memberProfile.memberDetails.gender}" class="w-full text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round outline-none focus:border-primary" disabled="true" />
                      
                   
                </div>
@@ -79,20 +79,20 @@
                <div class="formgrid grid">
                   <div class="field col-12 md:col-6 ">
                      <label for="bank">Current Employment</label>
-                     <p:inputText id="currentEmployment" type="text" value="#{dashboard.memberDetails.currentEmployment}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="currentEmployment" type="text" value="#{memberProfile.memberDetails.currentEmployment}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                   </div>
                   <div class="field col-12 md:col-6 ">
                      <label for="employerName">Employer Name</label>
-                     <p:inputText id="employerName" type="text" value="#{dashboard.memberDetails.employerName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="employerName" type="text" value="#{memberProfile.memberDetails.employerName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                   </div>
 
                   <div class="field col-12 md:col-6 ">
                      <label for="income">Employer Phone Number</label>
-                     <p:inputMask mask="9999999999" id="employerPhoneNumber" type="text" value="#{dashboard.memberDetails.employerPhoneNumber}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputMask mask="9999999999" id="employerPhoneNumber" type="text" value="#{memberProfile.memberDetails.employerPhoneNumber}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                   </div>
                   <div class="field col-12 md:col-6">
                      <label for="option">Job Position</label>
-                     <p:inputText  id="position" type="text" value="#{dashboard.memberDetails.jobPosition}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText  id="position" type="text" value="#{memberProfile.memberDetails.jobPosition}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                      
                   </div>
 
@@ -104,11 +104,11 @@
                      
                       <div class="field col-12 md:col-6 ">
                          <label for="bank">Monthly Salary</label>
-                         <p:inputText id="bank" type="text" value="#{dashboard.memberDetails.monthlySalary}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                         <p:inputText id="bank" type="text" value="#{memberProfile.memberDetails.monthlySalary}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                       </div>
                       <div class="field col-12 md:col-6 ">
                          <label for="account">Sources of Income</label>
-                         <p:inputText id="account" type="text" value="#{dashboard.memberDetails.sourcesOfIncome}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                         <p:inputText id="account" type="text" value="#{memberProfile.memberDetails.sourcesOfIncome}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                         
                       </div>
                   
@@ -119,17 +119,17 @@
                <div class="formgrid grid">
                   <div class="field col-12 md:col-6 ">
                      <label for="bank">Name</label>
-                     <p:inputText id="refereeName" value="#{dashboard.memberDetails.refereeName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                     <p:inputText id="refereeName" value="#{memberProfile.memberDetails.refereeName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                   </div>
                   <div class="field col-12 md:col-6 ">
                      <label for="refereePhoneNumber">Phone Number</label>
-                     <p:inputMask mask="9999999999" id="refereePhoneNumber" value="#{dashboard.memberDetails.refereePhoneNumber}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                     <p:inputMask mask="9999999999" id="refereePhoneNumber" value="#{memberProfile.memberDetails.refereePhoneNumber}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                   </div>
 
                   
                   <div class="field col-12 md:col-3">
                      <label for="option">Job Position</label>
-                     <p:inputText id="refereePosition" type="text" value="#{dashboard.memberDetails.jobPosition}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
+                     <p:inputText id="refereePosition" type="text" value="#{memberProfile.memberDetails.jobPosition}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
                      
                   </div>    
                
@@ -154,28 +154,28 @@
                         <div class="formgrid grid">
                            <div class="field col-12 md:col-6 ">
                <label for="originalPassword">Original Password</label> <br/>
-               <p:password id="originalPassword" value="#{dashboard.oldPassword}" toggleMask="true" redisplay="true"/>
+               <p:password id="originalPassword" value="#{memberProfile.oldPassword}" toggleMask="true" redisplay="true"/>
        </div>
           
        <div class="field col-12 md:col-6 ">
                <label for="newPassword">New Password</label><br/>
-               <p:password id="newPassword" value="#{dashboard.newPassword}" toggleMask="true" redisplay="true"/>
+               <p:password id="newPassword" value="#{memberProfile.newPassword}" toggleMask="true" redisplay="true"/>
                </div>
                <div class="field col-12 md:col-6 ">
                <label for="confirmPassword">Confirm Password</label><br/>
-               <p:password id="confirmPassword" value="#{dashboard.confirmPassword}" toggleMask="true" redisplay="true"/>
+               <p:password id="confirmPassword" value="#{memberProfile.confirmPassword}" toggleMask="true" redisplay="true"/>
                </div>
                <!-- Command button to submit the form and change the password -->
                
                </div>
-               <p:commandButton value="Save Changes" action="#{dashboard.changePassword()}" update="@form" />
+               <p:commandButton value="Save Changes" action="#{memberProfile.changePassword()}" update="growl" />
                </div>
                </div>
            </p:dialog>
 
             <div class="formgrid grid">
             <div class="field col-12 md:col-6">
-               <p:commandButton value="Save Changes" action="#{dashboard.updateMember()}"/>
+               <p:commandButton value="Save Changes" action="#{memberProfile.updateMember()}" update="growl"/>
                 <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
 
               </div>

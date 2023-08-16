@@ -13,20 +13,24 @@
 </h:head>
 
 <h:body>
-    <div class="grid">
-        <div class="col-12">
-    <p:card class="navbar">
-        <p:graphicImage library="images"  name="mylogo.png" alt="image not there" class="logoImage"/>
-        <span class="span">
-            <div class="div1">
-                <p:link outcome="#{navigation.logIn}"  title="Log Out" >
-    <i class="pi pi-sign-out mb-3" style="color:#4169E1;font-size:2rem;"></i>
-</p:link>
+    <div class="flex justify-content-between  flex-wrap col-12">
+        <div class="flex align-items-center">
+            <p:graphicImage
+                    library="images"
+                    name="mylogo.png"
+                    alt="image not there"
+                    height="100px"
+            />
+        </div>
 
-            </div>
-        </span>
-    </p:card>
-    </div>
+        <div class="flex align-items-center">
+            <p:link outcome="#{navigation.logIn}" title="Log Out">
+                <i
+                        class="pi pi-sign-out mb-3"
+                        style="color: #4169e1; font-size: 2rem"
+                ></i>
+            </p:link>
+        </div>
     </div>
     </h:body>
 </html>

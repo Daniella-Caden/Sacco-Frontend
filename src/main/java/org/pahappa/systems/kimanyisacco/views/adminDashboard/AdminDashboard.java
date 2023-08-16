@@ -6,9 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.primefaces.model.SortOrder;
-import org.primefaces.model.SortMeta;
-import java.util.Collections;
 import java.io.Serializable;
 
 import org.primefaces.model.charts.ChartData;
@@ -18,33 +15,38 @@ import org.primefaces.model.charts.pie.PieChartModel;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 import javax.servlet.http.HttpSession;
 
-import org.pahappa.systems.kimanyisacco.controllers.HyperLinks;
-import org.pahappa.systems.kimanyisacco.models.Members;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
-import org.pahappa.systems.kimanyisacco.services.MemberImpl;
-import org.pahappa.systems.kimanyisacco.services.TransactionsImpl;
-import org.pahappa.systems.kimanyisacco.services.UserImpl;
+import org.pahappa.systems.kimanyisacco.constants.Status;
+import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.models.Transaction;
+import org.pahappa.systems.kimanyisacco.models.Account;
+import org.pahappa.systems.kimanyisacco.models.Admin;
+import org.pahappa.systems.kimanyisacco.services.MemberServiceImpl;
+import org.pahappa.systems.kimanyisacco.services.TransactionServiceImpl;
+import org.pahappa.systems.kimanyisacco.services.AccountServiceImpl;
+import org.pahappa.systems.kimanyisacco.services.Interfaces.*;
+import org.pahappa.systems.kimanyisacco.services.AdminServiceImpl;
 // import org.pahappa.systems.kimanyisacco.views.adminDashboard.MemberComparator;
 
 @ManagedBean(name = "admin")
 @SessionScoped
 public class AdminDashboard implements Serializable{
-private Members member;
-private Members memberResult; 
-private Members memberDetails;
-private Transactions memberTransaction;
-private List<Members> members;
-private List<Transactions> transact;
+private Member member;
+private Member memberResult; 
+private Member memberDetails;
+private Admin adminDetails;
+private Transaction memberTransaction;
+private List<Member> members;
+private List<Transaction> transact;
 private PieChartModel pieModel;
 private  String oldPassword;
 private String newPassword;
 private String confirmPassword;
+private Account memberAccount;
 public String getOldPassword() {
     return oldPassword;
 }
@@ -77,7 +79,7 @@ public void setPieModel(PieChartModel pieModel){
   this.pieModel = pieModel;
 }
 
-public Transactions getMemberTransaction() {
+public Transaction getMemberTransaction() {
   return memberTransaction;
 }
 
@@ -85,67 +87,86 @@ public Transactions getMemberTransaction() {
 public void init(){
   createPieModel();
 }
-public void setMemberTransactions(Transactions memberTransactions) {
+public void setMemberTransaction(Transaction memberTransaction) {
   this.memberTransaction = memberTransaction;
 }
-public List<Transactions> getTransactions() {
+public List<Transaction> getTransaction() {
   return transact;
 }
 
-public void setTransact(List<Transactions> transact) {
+public void setTransact(List<Transaction> transact) {
   this.transact = transact;
 }
-MemberImpl memberImpl = new MemberImpl();
-TransactionsImpl transImpl = new TransactionsImpl();
-public Members getMember(){
+MemberService memberService = new MemberServiceImpl();
+TransactionService transactionService = new TransactionServiceImpl();
+AccountService accountService = new AccountServiceImpl();
+AdminService adminService = new AdminServiceImpl();
+public Member getMember(){
         return member;
     }
 
- public void  setMembers(Members member){
+ public void  setMember(Member member){
       this.member=member;
     }   
-    // Add this field to hold the result
-    private List<Members> result; 
-    private List<Transactions> withdraws;// Add this property
+    
+    private List<Member> result; 
+    private List<Transaction> withdraws; 
 
-    public List<Transactions> getWithdraws() {
+    public List<Transaction> getWithdraws() {
       return withdraws;
     }
 
-    public void setWithdraws(List<Transactions> withdrawResult) {
+    public void setWithdraws(List<Transaction> withdrawResult) {
       this.withdraws = withdrawResult;
     }
 
-    public List<Members> getResult() {
+    public List<Member> getResult() {
         return result;
     }
 
-    public void setResult(List<Members> result) {
+    public void setResult(List<Member> result) {
         this.result = result;
     }
    
 
-    public Members getMemberResult() {
+    public Member getMemberResult() {
       return memberResult;
   }
 
-  public void setMemberResult(Members MemberResult) {
+  public void setMemberResult(Member memberResult) {
       this.memberResult = memberResult;
   }
-  public Members getMemberDetails() {
+
+  public Account getMemberAccount() {
+    return memberAccount;
+}
+
+public void setMemberAccount(Account memberAccount) {
+    this.memberAccount = memberAccount;
+}
+
+  public Member getMemberDetails() {
     return memberDetails;
 }
 
-public void setMemberDetails(Members memberDetails) {
+public void setMemberDetails(Member memberDetails) {
     this.memberDetails = memberDetails;
 }
+public Admin getAdminDetails() {
+  return adminDetails;
+}
 
+public void setAdminDetails(Admin adminDetails) {
+  this.adminDetails = adminDetails;
+}
  
     public AdminDashboard(){
-        this.member=new Members();
-        this.memberResult=new Members();
-        this.memberDetails = new Members();
-        this.memberTransaction=new Transactions();
+        this.member=new Member();
+        this.memberResult=new Member();
+        this.memberDetails = new Member();
+        this.memberTransaction=new Transaction();
+        this.memberAccount= new Account();
+        this.adminDetails = new Admin();
         createPieModel();
         
     
@@ -156,8 +177,8 @@ public void setMemberDetails(Members memberDetails) {
 
       PieChartDataSet dataSet = new PieChartDataSet();
       List<Number> values = new ArrayList<>();
-      values.add(transImpl.getWithdrawType());
-      values.add(transImpl.getDepositType());
+      values.add(transactionService.getWithdrawType());
+      values.add(transactionService.getDepositType());
      
       dataSet.setData(values);
 
@@ -177,23 +198,13 @@ public void setMemberDetails(Members memberDetails) {
       pieModel.setData(data);
   }
 
-  public List<Members> viewJoin() throws IOException{
+  public List<Member> viewJoin() throws IOException{
     
-    return memberImpl.getJoinRequests(); 
+    return memberService.getJoinRequests();
     
   }
   
   
-  public void doApprove(Members memberResult)throws IOException{
-    this.memberResult = memberResult;
-    
-    System.out.println("Name"+ memberResult.getFirstName());
-    System.out.println("Name"+ memberResult.getStatus());
-
-    String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-    System.out.println("mybaseurl:"+context);
-    FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/approve.xhtml");
-  }
 
    private void addFlashMessage(FacesMessage.Severity severity, String summary, String detail) {
     FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -203,9 +214,9 @@ public void setMemberDetails(Members memberDetails) {
   }
   public void Approve(String userName,String firstName) throws IOException{
     System.out.println(userName);
-    memberImpl.updateStatus(userName,"APPROVED");
-    memberImpl.sendApprovalEmail(userName,firstName);
-    addFlashMessage(FacesMessage.SEVERITY_INFO, "Member Approved and Notified","The membership application for the approved member has been successfully processed. An email notification has been sent to the member with further details");
+    memberService.updateStatus(userName,Status.APPROVED);
+    memberService.sendApprovalEmail(userName,firstName);
+    addFlashMessage(FacesMessage.SEVERITY_INFO, "Member Approved and Notified","The Memberhip application for the approved member has been successfully processed. An email notification has been sent to the member with further details");
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   
@@ -214,9 +225,9 @@ public void setMemberDetails(Members memberDetails) {
 
   public void Reject(String userName,String firstName) throws IOException{
     System.out.println(userName);
-    memberImpl.updateStatus(userName,"REJECTED");
-    memberImpl.sendRejectionEmail(userName,firstName);
-    addFlashMessage(FacesMessage.SEVERITY_INFO, "Member Rejected","The membership application for the rejected member has been processed. An email notification has been sent to the member informing them about the rejection");
+    memberService.updateStatus(userName,Status.REJECTED);
+    memberService.sendRejectionEmail(userName,firstName);
+    addFlashMessage(FacesMessage.SEVERITY_INFO, "Member Status.REJECTED","The Memberhip application for the Status.REJECTED member has been processed. An email notification has been sent to the member informing them about the rejection");
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
     FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");   
@@ -232,7 +243,8 @@ public void setMemberDetails(Members memberDetails) {
         // Retrieve the user's email from the session
     userEmail = (String) session.getAttribute("userName");
 
-    memberDetails = memberImpl.getMemberByUsername(userEmail); 
+    adminDetails = adminService.getAdmin("admin@kimwanyi.com");
+    System.out.println(adminDetails.getEmail());
 String context = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
             System.out.println("mybaseurl:" + context);
             FacesContext.getCurrentInstance().getExternalContext().redirect(context + "/pages/admin/profile.xhtml");
@@ -249,31 +261,40 @@ String context = FacesContext.getCurrentInstance().getExternalContext().getReque
          System.out.println(oldPassword);
         System.out.println(newPassword);
         System.out.println(confirmPassword);
-      memberImpl.changePassword(oldPassword,newPassword,confirmPassword,"admin@kimwanyi.com");
-     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Password changes saved successfully!", null);
-         FacesContext.getCurrentInstance().addMessage(null, message);
-       String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
+
+        if(newPassword.equals(confirmPassword)){
+     boolean passwordChangeSuccess = adminService.changePassword(oldPassword,newPassword,"admin@kimwanyi.com");
+    System.out.println(passwordChangeSuccess);
+     if(passwordChangeSuccess){
+
+      addFlashMessage(FacesMessage.SEVERITY_INFO, "","Your password has been successfully updated.");
+      String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
          System.out.println("mybaseurl:"+context);
-         FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/profile.xhtml"); 
+         FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/profile.xhtml");
+         }
+
+         else {
+          addFlashMessage(FacesMessage.SEVERITY_ERROR, "","You entered a wrong old password");
+         }
+        }
+
+        else{
+          addFlashMessage(FacesMessage.SEVERITY_ERROR, "","The new password and confirmation password do not match. ");
+        }
    }
 
-  public List<Transactions> viewRequests() throws IOException{
+  public List<Transaction> viewRequests() throws IOException{
     
-   return transImpl.getWithdrawalRequests();
+   return transactionService.getWithdrawalRequests();
     
     
-    // String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
-    // System.out.println("mybaseurl:"+context);
-    // FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/withdrawalRequests.xhtml");
-
-// for(Transactions t:withdraws){
-//     System.out.println(t.getMember().getFirstName());
-//      System.out.println(t.getCreatedOn());
-
-// }   
+      
   }
-
-  public void viewWithdrawal(Transactions memberTransaction) throws IOException{
+public double getAccountBalance(String userName){
+  Account account= transactionService.getAccountBalance(userName);
+  return account.getAccountBalance();
+}
+  public void viewWithdrawal(Transaction memberTransaction) throws IOException{
     this.memberTransaction = memberTransaction;
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
@@ -282,20 +303,22 @@ String context = FacesContext.getCurrentInstance().getExternalContext().getReque
   }
 
   public void updateAdmin() throws IOException{
-    memberImpl.updateAdmin(memberDetails);
+  boolean updateProfileSuccess = adminService.updateAdmin(adminDetails);
 
+  if(updateProfileSuccess){
+    addFlashMessage(FacesMessage.SEVERITY_INFO, "","Your profile has been successfully updated.");
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
    System.out.println("mybaseurl:"+context);
-   FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");
+   FacesContext.getCurrentInstance().getExternalContext().redirect(context+"/pages/admin/adminDashboard.xhtml");}
   }
 
-  public void approveWithdrawal(String userName,int id,String decision) throws IOException{
+  public void approveWithdrawal(String userName,long id,String decision) throws IOException{
     System.out.println(userName);
-    transImpl.updateStatus(id,decision);
+    transactionService.updateStatus(id,decision);
     if(decision.equals("APPROVE")){
      addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Request Approved","The withdrawal request has been successfully approved.");}
      else{
-       addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Request Rejected","The withdrawal request has been rejected.");
+       addFlashMessage(FacesMessage.SEVERITY_INFO, "Withdrawal Request Status.REJECTED","The withdrawal request has been Status.REJECTED.");
      }
     String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
     System.out.println("mybaseurl:"+context);
@@ -303,13 +326,13 @@ String context = FacesContext.getCurrentInstance().getExternalContext().getReque
 
   }
 
-public List<Members> viewMembers(){
-if(members==null){
-  members= memberImpl.getMember();}
- return members;
+public List<Account> viewMember(){
+
+  return accountService.getAccounts();
 }
 
-public void memberView(Members memberResult) throws IOException{
+
+public void memberView(Member memberResult) throws IOException{
   this.memberResult=memberResult;
   
   String context= FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();
@@ -318,8 +341,8 @@ public void memberView(Members memberResult) throws IOException{
 }
 
 
-public List<Transactions> viewTransactions(String userName){
-  return transImpl.getHistory(userName);
+public List<Transaction> viewTransactions(String userName){
+  return transactionService.getHistory(userName);
 }
 
 

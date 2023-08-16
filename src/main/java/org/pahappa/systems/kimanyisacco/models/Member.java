@@ -2,32 +2,28 @@ package org.pahappa.systems.kimanyisacco.models;
 
 import java.time.LocalDate;
 import java.util.List;
-
-
+import org.pahappa.systems.kimanyisacco.constants.*;
 import javax.persistence.*;
+
+import org.pahappa.systems.kimanyisacco.constants.Gender;
+
 @Entity
 @Table(name = "members")
-public class Members {
-
-    
-    private long id;
+public class Member {
 
     private String userName;
-   
 
     private String password;
-   
 
-    private String status;
-  
+    private Status status;
 
     private String firstName;
     private String lastName;
     private String location;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String email;
     private String telephoneContact;
-    private String gender;
+    private Gender gender;
     private String currentEmployment;
     private String employerName;
     private String employerPhoneNumber;
@@ -39,26 +35,7 @@ public class Members {
     private String refereeJobPosition;
     private double accountBalance;
 
-    // Constructors
-    // Getters and Setters
-    
-// @OneToMany(fetch = FetchType.LAZY)
-// private  List<Transactions> transactions;
-
-// Constructors, getters, setters, and additional methods as needed
-
-// Getter and Setter for transactions
-// public List<Transactions> getTransactions() {
-//     return transactions;
-// }
-
-// public void setTransactions( List<Transactions> transactions) {
-//     this.transactions = transactions;
-// }
-
-
-
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -68,47 +45,39 @@ public class Members {
     }
 
     @Id
-    @Column(name = "userName", nullable = false)
-     public String getUserName() {
+    @Column(name = "user_name", nullable = false)
+    public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
-        
-               this.userName = userName;
-        
+
+        this.userName = userName;
+
     }
 
-@Column(name = "password", nullable = true)
-     public String getPassword() {
+    @Column(name = "password", nullable = true)
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-       
+
         this.password = password;
     }
-@Column(name = "status", nullable = true)
-      public String getStatus() {
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = true)
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-       
+    public void setStatus(Status status) {
+
         this.status = status;
     }
 
-   @Column(name = "accountBalance", nullable = true)
-    public double getAccountBalance() {
-        return accountBalance;
-    }
-
-    public void setAccountBalance(double accountBalance) {
-        
-        this.accountBalance = accountBalance;
-    }
-
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -126,12 +95,12 @@ public class Members {
         this.location = location;
     }
 
-    @Column(name = "dateOfBirth", nullable = false)
-    public String getDateOfBirth() {
+    @Column(name = "date_of_birth", nullable = false)
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -144,7 +113,7 @@ public class Members {
         this.email = email;
     }
 
-    @Column(name = "telephoneContact", nullable = false)
+    @Column(name = "telephone_contact", nullable = false)
     public String getTelephoneContact() {
         return telephoneContact;
     }
@@ -153,16 +122,17 @@ public class Members {
         this.telephoneContact = telephoneContact;
     }
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = true)
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-    @Column(name = "currentEmployment", nullable = false)
+    @Column(name = "current_employment", nullable = false)
     public String getCurrentEmployment() {
         return currentEmployment;
     }
@@ -171,7 +141,7 @@ public class Members {
         this.currentEmployment = currentEmployment;
     }
 
-    @Column(name = "employerName", nullable = false)
+    @Column(name = "employer_name", nullable = false)
     public String getEmployerName() {
         return employerName;
     }
@@ -180,7 +150,7 @@ public class Members {
         this.employerName = employerName;
     }
 
-    @Column(name = "employerPhoneNumber", nullable = false)
+    @Column(name = "employer_phone_number", nullable = false)
     public String getEmployerPhoneNumber() {
         return employerPhoneNumber;
     }
@@ -189,7 +159,7 @@ public class Members {
         this.employerPhoneNumber = employerPhoneNumber;
     }
 
-    @Column(name = "jobPosition", nullable = false)
+    @Column(name = "job_position", nullable = false)
     public String getJobPosition() {
         return jobPosition;
     }
@@ -198,7 +168,7 @@ public class Members {
         this.jobPosition = jobPosition;
     }
 
-    @Column(name = "monthlySalary", nullable = false)
+    @Column(name = "monthly_salary", nullable = false)
     public double getMonthlySalary() {
         return monthlySalary;
     }
@@ -207,7 +177,7 @@ public class Members {
         this.monthlySalary = monthlySalary;
     }
 
-    @Column(name = "sourcesOfIncome", nullable = false) 
+    @Column(name = "source_of_income", nullable = false)
     public String getSourcesOfIncome() {
         return sourcesOfIncome;
     }
@@ -216,7 +186,7 @@ public class Members {
         this.sourcesOfIncome = sourcesOfIncome;
     }
 
-    @Column(name = "refereeName", nullable = false)
+    @Column(name = "referee_name", nullable = false)
     public String getRefereeName() {
         return refereeName;
     }
@@ -225,7 +195,7 @@ public class Members {
         this.refereeName = refereeName;
     }
 
-    @Column(name = "refereePhoneNumber", nullable = false)
+    @Column(name = "referee_phone_number", nullable = false)
     public String getRefereePhoneNumber() {
         return refereePhoneNumber;
     }
@@ -234,7 +204,7 @@ public class Members {
         this.refereePhoneNumber = refereePhoneNumber;
     }
 
-    @Column(name = "refereeJobPosition", nullable = true)
+    @Column(name = "referee_job_position", nullable = true)
     public String getRefereeJobPosition() {
         return refereeJobPosition;
     }
@@ -243,14 +213,4 @@ public class Members {
         this.refereeJobPosition = refereeJobPosition;
     }
 
-    public void updateNotification(String userName2, int i) {
-    }
-
-    // Constructors if needed
-
-    // Additional methods as needed
-
 }
-
-    
-

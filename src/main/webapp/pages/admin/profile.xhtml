@@ -25,7 +25,7 @@
       <f:view>
          <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
             <h:form>
- 
+               <p:growl id="growl" showDetail="true" sticky="false" />
 
             <h1 style="text-align: center; color:#4169E1">My Profile</h1>
                   <div>
@@ -35,24 +35,20 @@
             <div class="formgrid grid">
                <div class="field col-12 md:col-6 ">
                   <label for="firstname6">First Name</label>
-                  <p:inputText id="firstname6" type="text" value="#{admin.memberDetails.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                  <p:inputText id="firstname6" type="text" value="#{adminProfile.adminDetails.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                </div>
                <div class="field col-12 md:col-6 ">
                   <label for="lastname6">Last Name</label>
-                  <p:inputText id="lastname6" value="#{admin.memberDetails.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
+                  <p:inputText id="lastname6" value="#{adminProfile.adminDetails.lastName}" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" />
                </div>
                
                <div class="field col-12">
                   <div class="field">
                      <label for="email">Email</label>
-                     <p:inputText id="email" type="text" value="#{admin.memberDetails.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
+                     <p:inputText id="email" type="text" value="#{adminProfile.adminDetails.email}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
                   </div>
                </div>
-               <div class="field col-12 md:col-6">
-                  <label for="city">Telephone Contact</label>
-                  <p:inputMask mask="9999999999" id="city" type="text" value="#{admin.memberDetails.telephoneContact}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"/>
-                
-            </div>
+              
             </div>
        
 
@@ -74,21 +70,21 @@
                         <div class="formgrid grid">
                            <div class="field col-12 md:col-6 ">
                <label for="originalPassword">Original Password</label> <br/>
-               <p:password id="originalPassword" value="#{admin.oldPassword}" toggleMask="true" redisplay="true"/>
+               <p:password id="originalPassword" value="#{adminProfile.oldPassword}" toggleMask="true" redisplay="true"/>
        </div>
           
        <div class="field col-12 md:col-6 ">
                <label for="newPassword">New Password</label><br/>
-               <p:password id="newPassword" value="#{admin.newPassword}" toggleMask="true" redisplay="true"/>
+               <p:password id="newPassword" value="#{adminProfile.newPassword}" toggleMask="true" redisplay="true"/>
                </div>
                <div class="field col-12 md:col-6 ">
                <label for="confirmPassword">Confirm Password</label><br/>
-               <p:password id="confirmPassword" value="#{admin.confirmPassword}" toggleMask="true" redisplay="true"/>
+               <p:password id="confirmPassword" value="#{adminProfile.confirmPassword}" toggleMask="true" redisplay="true"/>
                </div>
                <!-- Command button to submit the form and change the password -->
                
                </div>
-               <p:commandButton value="Save Changes" action="#{admin.adminPassword()}" update="@form" />
+               <p:commandButton value="Save Changes" action="#{adminProfile.adminPassword()}" update="@form" />
                </div>
                </div>   
 
@@ -96,7 +92,7 @@
 
             <div class="formgrid grid">
             <div class="field col-12 md:col-6">
-               <p:commandButton value="Save Changes" action="#{admin.updateAdmin()}"/>
+               <p:commandButton value="Save Changes" action="#{adminProfile.updateAdmin()}" update="growl"/>
                 <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
 
               </div>

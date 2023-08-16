@@ -1,149 +1,65 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-    <style>
-        .card--wrapper{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  position:relative;
-  top:120px;
-  left:100px;
-}
-.main--title{
-  color: rgba(113, 99, 186, 255);
-  padding-bottom: 10px;
-  font-size: 15px;
-}
-.payment--card{
-  background: rgb(229, 223, 233);
-  border-radius: 10px;
-  padding: 1.2rem;
-  width: 290px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.5s ease-in-out;
-}
-.payment--card:hover{
-  transform: translateY(-5px);
-}
-.card--header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.amount{
-  display: flex;
-  flex-direction: column;
-}
-.title{
-  font-size: 30px;
-  font-weight: 800;
-  color:#4169E1;
-}
-.amount--value{
-  font-size: 24px;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 600;
-  color:#4169E1;
-}
-.icon{
-  color: #fff;
-  padding: 0.8rem;
-  height: 60px;
-  width: 60px;
-  text-align: center;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  background: red;
-}
-.card-detail{
-  font-size: 18px;
-  color:#4169E1;
-  letter-spacing: 2px;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-
-.light-red{
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-.light-purple{
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
- 
-}
-.light-green{
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-
-}
-.light-blue{
-  background: rgb(254, 226, 254);
-  box-shadow: #fff;
-}
-    </style>
-
 </h:head>
-<ui:insert name="memberHeader">
-  <!-- Include the header content -->
-  <ui:include src="/template/adminHeader.xhtml" />
-</ui:insert>
+<h:body>
+    <f:view>
+        <f:event type="preRenderView" listener="#{loginForm.checkSessionValidity()}" />
 
-<h:body style ="background-color: rgb(252, 250, 250);">
-  <f:view>
-    <f:event type="preRenderView" listener="#{loginForm.display()}" />
+        <h:form>
 
-    <h:form>
-        <div class="card-container">
-            <ui:insert name="memberHeader">
-                <!-- Include the header content -->
-                <ui:include src="/template/adminSidebar.xhtml" />
-              </ui:insert>  
+            <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+                <div id="header" class="grid col-12 ui-card">
+                    <ui:insert name="header">
+                        <!-- Include the header content -->
+                        <ui:include src="/template/adminHeader.xhtml" />
+                    </ui:insert>
 
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
-    <h1>Withdrawals and Deposits Overview</h1> 
-<div class="grid">
-    <div class="col-12 lg:col-6 xl:col-4">
-        <div class="card">
-            <p:pieChart model="#{admin.getPieModel()}" style="width: 100%; height: 500px;"/>
-        </div>
-    </div>
-</div>
+                </div>
 
-    
-</p:card>
+                <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+                    <div id="side-bar" class="grid col-2 ui-card border-round-3xl">
+                        <ui:insert name="memberSideBar">
+                            <ui:include src="/template/adminSidebar.xhtml" />
+                        </ui:insert>
 
-                 
-</div>
-<div>
+                    </div>
 
-</div>
+                    <div id="menu" class="grid col ui-card border-round-3xl">
+                            <h1 style="text-align:center;">Withdrawals and Deposits Overview</h1>
 
-    
+                                    <div class=" mt-8 col-12 lg:col-6 xl:col-4">
+                                        <p:pieChart model="#{adminReports.getPieModel()}" style="width: 100%; height: 500px;"/>
+                                    </div>
 
-    </h:form>  
-  </f:view>            
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </f:view>
 </h:body>
-  
-
 </html>

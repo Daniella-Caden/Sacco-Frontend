@@ -9,33 +9,28 @@
 >
 <h:head>
     <h:outputStylesheet name="css/App.css"/>
-      
+
 </h:head>
 
 <h:body>
-    <div class="grid">
-        <div class="col-12">
-    <p:card style="width:95rem;height:6rem;">
-    <p:graphicImage library="images" name="mylogo.png" alt="image not there" style="position: absolute; top: 0; left: 0; height:100px; width: 250px;" />
+    <div class="flex justify-content-between  flex-wrap col-12">
+        <div class="flex align-items-center">
+            <p:graphicImage
+                    library="images"
+                    name="mylogo.png"
+                    alt="image not there"
+                    height="100px"
+            />
+        </div>
 
-    <div style="position: absolute; top: 0; right: 0; display: flex; align-items: center; margin-right: 6%; margin-top: 2%;" class="gap-5">
-        
-        <!-- <span class="notification-badge">   <h:outputText value="#{notifications.getNotificationsCount()}" /></span>
-        <p:graphicImage library="images" name="notifications2.png" alt="image not there" style="height: 40px; width: 40px; margin-right: 24px;" /> -->
-        
-     <div>
-        <p:link outcome="#{navigation.home}"  title="Log Out" >
-    <i class="pi pi-sign-out mb-3" style="color:#4169E1;font-size:2rem;"></i>
-</p:link>
-
-        
-    </div>
-    </div>
-</p:card>
-
-
+        <div class="flex align-items-center">
+            <p:commandLink action="#{loginForm.logOut()}" title="Log Out">
+                <i
+                        class="pi pi-sign-out mb-3"
+                        style="color: #4169e1; font-size: 2rem"
+                ></i>
+            </p:commandLink>
         </div>
     </div>
-       
-    </h:body>
+</h:body>
 </html>

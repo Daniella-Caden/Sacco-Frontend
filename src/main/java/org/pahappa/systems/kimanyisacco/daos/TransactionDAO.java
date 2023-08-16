@@ -1,13 +1,17 @@
 package org.pahappa.systems.kimanyisacco.daos;
+
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.pahappa.systems.kimanyisacco.config.SessionConfiguration;
-import org.pahappa.systems.kimanyisacco.models.Members;
-import org.pahappa.systems.kimanyisacco.models.Transactions;
+import org.pahappa.systems.kimanyisacco.constants.Status;
+import org.pahappa.systems.kimanyisacco.constants.TransactionType;
+import org.pahappa.systems.kimanyisacco.models.Member;
+import org.pahappa.systems.kimanyisacco.models.Transaction;
+import org.pahappa.systems.kimanyisacco.models.Account;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,306 +20,299 @@ import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Disjunction;
 
 import javax.persistence.criteria.JoinType;
+
 public class TransactionDAO {
 
-    public boolean save(Transactions trans){
 
-       boolean bal = true;
-        Transaction transaction = null;
-        boolean transactionSuccess = false;
-        Members member = trans.getMember();
+
+    public boolean save(Transaction trans) {
+
+        boolean bal = true;
+        org.hibernate.Transaction transaction = null;
+        boolean Transactionsuccess = false;
+        Member member = trans.getMember();
+        Account account = getAccountBalance(member.getUserName());
+
         Session session = SessionConfiguration.getSessionFactory().openSession();
-       
-   
-     
-        try{
-            double accountBal=0;
-          
-            transaction = session.beginTransaction();
+        transaction = session.beginTransaction();
 
-       
 
-            System.out.println("Current:"+member.getAccountBalance());
-            System.out.println("Current:"+member.getUserName());
+        try {
 
-            
-
-            if(trans.getTransactionType().equals("deposit")){
-                trans.setStatus("APPROVED");
-                
-                 
-                
-                 session.save(trans);
-                 transactionSuccess = true;
-                 
-                 }
-
-                 else{
-       
-
-                    if(trans.getAmount()>=member.getAccountBalance()){
-                        bal = false;
-                        
-                       
-                    }
-
-                   
-                    else{
-                        
-                        trans.setStatus("PENDING");
-                         session.save(trans);
-                        
-                 
-                 
-                    }
-
-                    
-                 }
-
-                
-
-//             Members member = new Members();
-//             member = getMemberBalance(member.getUserName());
-//  System.out.println(member.getAccountBalance());           
-// if(trans.getTransactionType().equals("deposit")){
-//     accountBal = member.getAccountBalance()+trans.getAmount();
-// }
-
-            
-        }catch(Exception ex){
            
+
+            System.out.println("Current:" + member.getUserName());
+
+            if (trans.getTransactionType()==TransactionType.DEPOSIT) {
+                trans.setStatus(Status.DONE);
+
+                session.save(trans);
+                Transactionsuccess = true;
+
+            }
+
+            else {
+
+                if (trans.getAmount() >= account.getAccountBalance()) {
+                    bal = false;
+
+                }
+
+                else {
+
+                    trans.setStatus(Status.PENDING);
+                    session.save(trans);
+
+                }
+
+            }
+
+        } catch (Exception ex) {
+
             ex.printStackTrace();
         }
 
-        try{
-if(transactionSuccess){
-    Members m = (Members) session.get(Members.class,member.getUserName());
+        try {
+            if (Transactionsuccess) {
+                            
+                System.out.println("OLD:"+account.getAccountBalance());
+                account.setAccountBalance(account.getAccountBalance() + trans.getAmount());
+                System.out.println("NEW:"+account.getAccountBalance());
+                session.update(account);
+                
 
-   
- 
-    m.setAccountBalance(member.getAccountBalance()+trans.getAmount());
-
-    
-    session.update(m);
-
-        }}catch(Exception e){
+            }
+        } catch (Exception e) {
             System.out.println("error");
         }
 
-        try{
+        try {
             transaction.commit();
-        }catch(Exception e){
-            if(transaction!=null){
+        } catch (Exception e) {
+            if (transaction != null) {
                 transaction.rollback();
             }
             System.out.println("error");
         }
-return bal;
-        
+        return bal;
+
     }
 
-   
-    // public Members getMemberBalance(String userName){
-    //     try  {
-    //         Session session = SessionConfiguration.getSessionFactory().openSession();
-            
-    //         Criteria criteria = session.createCriteria(Members.class);
-    //         criteria.add(Restrictions.eq("userName", userName));
-            
-    //         return (Members) criteria.uniqueResult();
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return null;
-    //     }
+    public List<Transaction> getAllDeposits() {
 
-    // }
-    public List<Transactions> getWithdrawalRequests(){
-        
-        try  {
+        try {
             Session session = SessionConfiguration.getSessionFactory().openSession();
-            
-            Criteria criteria = session.createCriteria(Transactions.class);
-            criteria.add(Restrictions.eq("status", "PENDING"));
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+            criteria.add(Restrictions.eq("transactionType", TransactionType.DEPOSIT));
+
+
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public List<Transaction> getAllWithdraws() {
+
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+            criteria.add(Restrictions.eq("transactionType", TransactionType.WITHDRAW));
+
+
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public List<Transaction> getWithdrawalRequests() {
+
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+            criteria.add(Restrictions.eq("status", Status.PENDING));
+
             
             return criteria.list();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
- 
-    
-      
 
-}
-
-
-
-public Transactions getPending(String userName){
-    
-    try {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-
-        Criteria criteria = session.createCriteria(Transactions.class);
-        // Add restriction to filter by transactionType
-        criteria.add(Restrictions.eq("transactionType", "withdraw"));
-        criteria.add(Restrictions.eq("status", "PENDING"));
-        
-
-        // Create an alias for the member property and use it to add a restriction for userName
-        criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
-        criteria.add(Restrictions.eq("m.userName", userName));
-
-        return (Transactions)criteria.uniqueResult();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
     }
-}
 
+    public Transaction getPending(String userName) {
 
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
 
+            Criteria criteria = session.createCriteria(Transaction.class);
+            // Add restriction to filter by transactionType
+            criteria.add(Restrictions.eq("transactionType", TransactionType.WITHDRAW));
+            criteria.add(Restrictions.eq("status", Status.PENDING));
 
+            // Create an alias for the member property and use it to add a restriction for
+            // userName
+            criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
+            criteria.add(Restrictions.eq("m.userName", userName));
 
-// ...
-
-public List<Transactions> getNotifications(String userName) {
-    try {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-
-        Criteria criteria = session.createCriteria(Transactions.class);
-        // Add restriction to filter by transactionType
-        criteria.add(Restrictions.eq("transactionType", "withdraw"));
-        Disjunction statusRestrictions = Restrictions.disjunction();
-        statusRestrictions.add(Restrictions.eq("status", "DONE"));
-        statusRestrictions.add(Restrictions.eq("status", "REJECTED"));
-        criteria.add(statusRestrictions);
-
-        // Create an alias for the member property and use it to add a restriction for userName
-        criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
-        criteria.add(Restrictions.eq("m.userName", userName));
-
-        return criteria.list();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-    }
-}
-
-
- 
-    public List<Transactions> getHistory(String userName) {
-    try {
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-
-        Criteria criteria = session.createCriteria(Transactions.class);
-        criteria.add(Restrictions.eq("status","APPROVED"));
-        // Add restriction to filter by transactionType
-        // Create an alias for the member property and use it to add a restriction for userName
-        criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
-        criteria.add(Restrictions.eq("m.userName", userName));
-
-        return criteria.list();
-    } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-    }
-}
-      
-
-
-
-    public void updateAccountBalance(Double balance,String userName){
-        Transaction transaction = null;
-    try{
-    Session session = SessionConfiguration.getSessionFactory().openSession();
-    transaction = session.beginTransaction();
-    Members member = (Members) session.get(Members.class,userName);
-
-    
-    member.setAccountBalance(balance);
-
-    
-    session.update(member);
-    transaction.commit();
-    }catch(Exception ex) {
-        if (transaction != null) {
-            transaction.rollback();
+            return (Transaction) criteria.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
-    }
-
-
-    public void updateStatus(int id,String decision){
-        Transaction transaction = null;
-        try{
+    public Account getAccountBalance(String userName) {
         Session session = SessionConfiguration.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        Transactions trans = (Transactions) session.get(Transactions.class,id);
-    
-        if(decision.equals("APPROVE")){
-        trans.setStatus("DONE");
-        trans.setNotifications("Your withdrawal of " + trans.getAmount() + " has been approved");
-    
+
+        Criteria criteria = session.createCriteria(Account.class);
+        criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
+        criteria.add(Restrictions.eq("m.userName", userName));
+
+        return (Account) criteria.uniqueResult();
     }
 
-        else{
-            trans.setStatus("REJECTED");
-            trans.setNotifications("Your withdrawal of " + trans.getAmount() + " has been rejected.You have reached the withdrawal limit.Please contact the admin for more information");
-        }
-        
+    public List<Transaction> getNotifications(String userName) {
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
 
-        
-     
-        session.update(trans);
-        transaction.commit();
-        }catch(Exception ex) {
+            Criteria criteria = session.createCriteria(Transaction.class);
+            // Add restriction to filter by transactionType
+            criteria.add(Restrictions.eq("transactionType", TransactionType.WITHDRAW));
+            Disjunction statusRestrictions = Restrictions.disjunction();
+            statusRestrictions.add(Restrictions.eq("status", Status.APPROVED));
+            statusRestrictions.add(Restrictions.eq("status", Status.REJECTED));
+            criteria.add(statusRestrictions);
+
+            // Create an alias for the member property and use it to add a restriction for
+            // userName
+            criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
+            criteria.add(Restrictions.eq("m.userName", userName));
+
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Transaction> getHistory(String userName) {
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+            criteria.add(Restrictions.eq("status", Status.DONE));
+
+            // Add restriction to filter by transactionType
+            // Create an alias for the member property and use it to add a restriction for
+            // userName
+            criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
+            criteria.add(Restrictions.eq("m.userName", userName));
+
+            return criteria.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void updateAccountBalance(Double balance, String userName) {
+        org.hibernate.Transaction transaction = null;
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Criteria criteria = session.createCriteria(Account.class);
+            criteria.createAlias("member", "m", CriteriaSpecification.INNER_JOIN);
+            criteria.add(Restrictions.eq("m.userName", userName));
+
+            Account account = (Account)criteria.uniqueResult();
+           
+
+            account.setAccountBalance(balance);
+
+            session.update(account);
+            transaction.commit();
+        } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-    
+
     }
 
+    public void updateStatus(long id, String decision) {
+        org.hibernate.Transaction transaction = null;
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            Transaction trans = (Transaction) session.get(Transaction.class, id);
 
-    public void updateWithdraw(Transactions trans){
+            if (decision.equals("APPROVE")) {
+                trans.setStatus(Status.APPROVED);
+                trans.setNotifications("Your withdrawal of " + trans.getAmount() + " has been approved");
 
-            Transaction transaction = null;
-        try{
-        Session session = SessionConfiguration.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        Members member = trans.getMember();
-      Transactions tran = (Transactions) session.get(Transactions.class,trans.getId());
-      member.setAccountBalance(member.getAccountBalance()-trans.getAmount());
+            }
 
-      updateAccountBalance(member.getAccountBalance(),member.getUserName());
-        
-       LocalDate localDateToStore = LocalDate.now();
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String formattedDate = localDateToStore.format(dateFormatter);
-            tran.setCreatedOn(formattedDate);
-            tran.setStatus("APPROVED");
-    
-        
-     
-        session.update(tran);
-        transaction.commit();
-        }catch(Exception ex) {
+            else {
+                trans.setStatus(Status.REJECTED);
+                trans.setNotifications("Your withdrawal of " + trans.getAmount()
+                        + " has been rejected.You have reached the withdrawal limit.Please contact the admin for more information");
+            }
+
+            session.update(trans);
+            transaction.commit();
+        } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
         }
-    
+
     }
 
-    public List<Transactions> getTransactions(){
+    public void updateWithdraw(Transaction trans) {
 
-        try  {
+        org.hibernate.Transaction transaction = null;
+        try {
             Session session = SessionConfiguration.getSessionFactory().openSession();
-            
-            Criteria criteria = session.createCriteria(Transactions.class);
-            
-            
+            transaction = session.beginTransaction();
+            Member member = trans.getMember();
+            Transaction tran = (Transaction) session.get(Transaction.class, trans.getTransactionId());
+            Account account = getAccountBalance(member.getUserName());
+            account.setAccountBalance(account.getAccountBalance() - trans.getAmount());
+
+            updateAccountBalance(account.getAccountBalance(), member.getUserName());
+
+            LocalDate localDateToStore = LocalDate.now();
+
+            tran.setCreatedOn(localDateToStore);
+            tran.setStatus(Status.DONE);
+
+            session.update(tran);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        }
+
+    }
+
+    public List<Transaction> getTransaction() {
+
+        try {
+            Session session = SessionConfiguration.getSessionFactory().openSession();
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+
             return criteria.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -324,14 +321,13 @@ public List<Transactions> getNotifications(String userName) {
 
     }
 
-
-    public List<Transactions> getWithdrawType(){
-        try  {
+    public List<Transaction> getWithdrawType() {
+        try {
             Session session = SessionConfiguration.getSessionFactory().openSession();
-            
-            Criteria criteria = session.createCriteria(Transactions.class);
-            criteria.add(Restrictions.eq("transactionType", "withdraw"));
-            
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+            criteria.add(Restrictions.eq("transactionType", TransactionType.WITHDRAW));
+
             return criteria.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -339,13 +335,13 @@ public List<Transactions> getNotifications(String userName) {
         }
     }
 
-    public List<Transactions> getDepositType(){
-        try  {
+    public List<Transaction> getDepositType() {
+        try {
             Session session = SessionConfiguration.getSessionFactory().openSession();
-            
-            Criteria criteria = session.createCriteria(Transactions.class);
-            criteria.add(Restrictions.eq("transactionType", "deposit"));
-            
+
+            Criteria criteria = session.createCriteria(Transaction.class);
+            criteria.add(Restrictions.eq("transactionType", TransactionType.DEPOSIT));
+
             return criteria.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -353,9 +349,4 @@ public List<Transactions> getNotifications(String userName) {
         }
     }
 
-    }
-
-
-
-
-
+}

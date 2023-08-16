@@ -8,101 +8,157 @@
       xmlns:f="http://java.sun.com/jsf/core"
 >
 <h:head>
-    <h:outputStylesheet name="css/App.css"/>
-      
+  <h:outputStylesheet name="css/App.css"/>
+  <style>
+    .button-like-text{
+      background: none;
+      border: none;
+      color: #4169E1 ;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 18px;
+    }
+
+  </style>
+
 </h:head>
 
 <h:body>
-  <div class="grid">
-    <div class="col-3">
-    <p:card style="width: 15rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;">
-                <div style="display: flex; flex-direction: column; height: 100%;">
-                  <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-                    <p:commandLink action="#{admin.adminProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
-                      <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
-                  </p:commandLink>
-                  
-                   
-                         
-    
-                        
-                  </div>
-                  <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1rem;top:200px; margin-bottom: 1rem;">
-                    
-                    <div style="display: flex; align-items: center;margin-left:6%;" class="button-like-text" >
-                      Welcome,Admin
-                    </div>
-                   
-                   
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="home.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.adminDashboard}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Dashboard</p:link>
+  <div class="mt-5 ml-3">
+    <div class="flex align-items-center ml-8">
+      <p:commandLink action="#{adminProfile.adminProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
+        <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
+      </p:commandLink>
+    </div>
+    <div class="flex align-items-center mt-2"   style="
+              background: none;
+              border: none;
+              color: #4169e1;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 30px;
+            ">
 
-                    </span>
-              
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="joinrequest.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.joins}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Requests to Join SACCO</p:link>
+      Welcome,#{loginForm.adminResult.firstName}
+    </div>
+    <div class="flex align-items-center mt-7">
 
-                    </span>
-              
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="aboutUspng.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.members}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Members</p:link>
 
-                    </span>
-                    <span style="display: flex; align-items: center;">
-                        <p:graphicImage library="images" name="withdraw.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <p:link outcome="#{navigation.withdraws}" style="background: none;
-                        border: none;
-                        color: #4169E1 ;
-                        cursor: pointer;
-                        text-decoration: none;
-                        transition: color 0.3s;
-                        font-size: 18px;">Withdrawal Requests</p:link>
+      <p:graphicImage
+              library="images"
+              name="home.png"
+              alt="image not there"
+              height="50px"
+      />
 
-                      </span>
+      <p:link
+              outcome="#{navigation.adminDashboard}"
+              style="
+              background: none;
+              border: none;
+              color: #4169e1;
+              cursor: pointer;
+              text-decoration: none;
+              transition: color 0.3s;
+              font-size: 30px;
+            "
+      >Dashboard</p:link
+      > </div>
 
-                      <span style="display: flex; align-items: center;">
-                        <p:graphicImage library="images" name="reports5.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <p:link outcome="#{navigation.adminReports}" style="background: none;
-                        border: none;
-                        color: #4169E1 ;
-                        cursor: pointer;
-                        text-decoration: none;
-                        transition: color 0.3s;
-                        font-size: 18px;">Reports</p:link>
+    <div class="flex align-items-center mt-5">
+      <p:graphicImage
+              library="images"
+              name="joinrequest.png"
+              alt="image not there"
+              height="50px"
+      />
+      <p:link
+              outcome="#{navigation.joins}"
+              style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+      >Requests to Join Sacco</p:link
+      >
 
-                      </span>
+    </div>
 
-                       
+    <div class="flex align-items-center mt-5">
 
-                      
-                  </div>
-              
-                  
-                </div>
-              </p:card>
-              
-       </div>     
-      </div>
-    </h:body>
+      <p:graphicImage
+              library="images"
+              name="aboutUspng.png"
+              alt="image not there"
+              height="50px"
+      />
+      <p:link
+              outcome="#{navigation.members}"
+              style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+      >Members</p:link
+      >
+    </div>
+
+    <div class="flex align-items-center mt-5">
+
+      <p:graphicImage
+              library="images"
+              name="withdraw.png"
+              alt="image not there"
+              height="50px"
+      />
+      <p:link
+              outcome="#{navigation.withdraws}"
+              style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+      >Withdraw Requests</p:link
+      >
+    </div>
+
+    <div class="flex align-items-center mt-5">
+
+      <p:graphicImage
+              library="images"
+              name="reports5.png"
+              alt="image not there"
+              height="50px"
+      />
+      <p:link
+              outcome="#{navigation.adminReports}"
+              style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+      >Reports</p:link
+      >
+    </div>
+
+  </div>
+</h:body>
 </html>

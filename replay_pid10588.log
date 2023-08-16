@@ -308,13 +308,13 @@ instanceKlass org/eclipse/sisu/Mediator
 instanceKlass sun/reflect/generics/tree/TypeVariableSignature
 instanceKlass com/google/inject/Inject
 instanceKlass javax/inject/Inject
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$59
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$58
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$57
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$56
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$59
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$58
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$57
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$56
 instanceKlass java/lang/reflect/WildcardType
 instanceKlass java/lang/reflect/TypeVariable
-instanceKlass com/google/inject/spi/InjectionPoint$InjectableMembers
+instanceKlass com/google/inject/spi/InjectionPoint$InjectableMember
 instanceKlass com/google/inject/spi/InjectionPoint$InjectableMember
 instanceKlass com/google/inject/spi/InjectionPoint
 instanceKlass java/lang/reflect/ParameterizedType
@@ -415,19 +415,19 @@ instanceKlass java/util/stream/Node$OfPrimitive
 instanceKlass java/util/stream/Nodes$EmptyNode
 instanceKlass java/util/stream/Node
 instanceKlass java/util/stream/Nodes
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$51
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$51
 instanceKlass java/util/function/IntFunction
 instanceKlass java/util/stream/SortedOps
 instanceKlass com/google/common/collect/Ordering
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$50
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$49
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$50
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$49
 instanceKlass java/util/Comparator$$Lambda$48
 instanceKlass java/util/Comparator$$Lambda$47
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$46
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$45
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$46
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$45
 instanceKlass java/util/Comparator$$Lambda$44
-instanceKlass com/google/inject/internal/DeclaredMembers$$Lambda$43
-instanceKlass com/google/inject/internal/DeclaredMembers
+instanceKlass com/google/inject/internal/DeclaredMember$$Lambda$43
+instanceKlass com/google/inject/internal/DeclaredMember
 instanceKlass com/google/common/base/ExtraObjectsMethodsForWeb
 instanceKlass com/google/common/collect/ImmutableMap$Builder
 instanceKlass com/google/inject/internal/MoreTypes
@@ -712,7 +712,7 @@ instanceKlass com/google/inject/binder/ScopedBindingBuilder
 instanceKlass com/google/inject/spi/Message
 instanceKlass com/google/inject/spi/Element
 instanceKlass com/google/inject/spi/TypeListener
-instanceKlass com/google/inject/MembersInjector
+instanceKlass com/google/inject/MemberInjector
 instanceKlass com/google/inject/binder/AnnotatedConstantBindingBuilder
 instanceKlass com/google/inject/TypeLiteral
 instanceKlass org/aopalliance/intercept/MethodInterceptor
@@ -1635,7 +1635,7 @@ instanceKlass java/lang/ref/FinalReference
 instanceKlass java/lang/ref/WeakReference
 instanceKlass java/lang/ref/SoftReference
 ciInstanceKlass java/lang/ref/Reference 1 1 159 10 9 10 9 9 7 10 10 9 9 10 10 10 9 9 100 10 10 10 7 10 10 10 7 8 10 7 10 10 10 7 10 10 7 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 100 1 1 100 1 1 1 1 1 1 1 1 1 1 1 1 1 1 7 1 1 1 1 1 1 1 1 1 7 1 1 1 1 12 12 12 12 12 1 12 12 12 12 12 12 12 12 12 1 12 12 1 12 12 12 1 1 12 1 12 12 12 1 7 12 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-staticfield java/lang/ref/Reference processPendingLock Ljava/lang/Object; java/lang/Object
+staticfield java/lang/ref/Reference processStatus.PENDINGLock Ljava/lang/Object; java/lang/Object
 instanceKlass sun/util/locale/provider/LocaleResources$ResourceReference
 instanceKlass sun/util/resources/Bundles$BundleReference
 instanceKlass org/eclipse/sisu/inject/MildKeys$Soft

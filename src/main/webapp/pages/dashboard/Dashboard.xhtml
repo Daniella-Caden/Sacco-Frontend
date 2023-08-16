@@ -1,212 +1,88 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-    <style>
-        .card--wrapper{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  position:relative;
-  top:120px;
-  left:100px;
-}
-.main--title{
-  color: rgba(113, 99, 186, 255);
-  padding-bottom: 10px;
-  font-size: 15px;
-}
-.payment--card{
-  background: rgb(229, 223, 233);
-  border-radius: 10px;
-  padding: 1.2rem;
-  width: 290px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.5s ease-in-out;
-}
-.payment--card:hover{
-  transform: translateY(-5px);
-}
-.card--header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.amount{
-  display: flex;
-  flex-direction: column;
-}
-.title{
-  font-size: 30px;
-  font-weight: 800;
-  color:#4169E1;
-}
-.amount--value{
-  font-size: 24px;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 600;
-  color:#4169E1;
-}
-.icon{
-  color: #fff;
-  padding: 0.8rem;
-  height: 60px;
-  width: 60px;
-  text-align: center;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  background: red;
-}
-.card-detail{
-  font-size: 18px;
-  color:#4169E1;
-  letter-spacing: 2px;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-
-.light-red{
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-.light-purple{
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
- 
-}
-.light-green{
-  background: white;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-
-}
-.light-blue{
-  background: rgb(254, 226, 254);
-  box-shadow: #fff;
-}
-    </style>
-
 </h:head>
-<ui:insert name="memberHeader">
-  <!-- Include the header content -->
-  <ui:include src="/template/memberHeader.xhtml" />
-</ui:insert>
+<h:body>
+    <f:view>
+        <f:event type="preRenderView" listener="#{loginForm.memberDisplay()}" />
+        <f:event type="preRenderView" listener="#{loginForm.checkSessionValidity()}" />
+        <h:form>
+            <p:growl id="growl" showDetail="true" sticky="false" />
+            <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+                <div id="header" class="grid col-12 ui-card">
+                    <ui:insert name="header">
+                        <!-- Include the header content -->
+                        <ui:include src="/template/memberHeader.xhtml" />
+                    </ui:insert>
 
-<h:body style ="background-color: rgb(252, 250, 250);">
-   
-<f:view>
-  <f:event type="preRenderView" listener="#{loginForm.display()}" />
-    <h:form>
-      <p:growl id="growl" showDetail="true" sticky="false" />
-        <div class="card-container">
-            <ui:insert name="memberHeader">
-                <!-- Include the header content -->
-                <ui:include src="/template/loginSideBar1.xhtml" />
-              </ui:insert>  
-
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
-   
-
-    
-    <div class="card--wrapper">
-        <div class="payment--card light-red">
-            <div class="card--header">
-                <div class="amount">
-                    <span class="amount--value">
-                     UGX #{loginForm.formattedBalance} 
-                    </span>
-                    <span class="title">
-                        Account balance
-                    </span>
-                    
                 </div>
-                
-                <p:graphicImage library="images" name="balance.png" alt="image not there" style="height: 100px; width: 100px;" />
-            </div>
-           
-        </div>
-        <div class="payment--card light-green">
-            <div class="card--header">
-                <div class="amount">
-                    <span class="amount--value">
-                      #{loginForm.recentTransaction.transactionType}:<br/>UGX#{loginForm.formattedTransactionType}
-                    </span>
-                    <span class="title">
-                        Recent transaction 
-                    </span>
-                    
+
+                <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+                    <div id="side-bar" class="grid col-2 ui-card border-round-3xl">
+                        <ui:insert name="memberSideBar">
+                            <ui:include src="/template/loginSideBar1.xhtml" />
+                        </ui:insert>
+
+                    </div>
+
+                    <div id="menu" class="grid col ui-card border-round-3xl">
+                        <div class="grid col-12 gap-4" style="height:300px;margin-top:13%;margin-left:25%;">
+                            <div class="col-3 ui-card border-round-3xl flex align-items-center p-4">
+
+                                <div style="font-size: 30px;
+  font-weight: 800;
+  color:#4169E1;"> #{loginForm.formattedBalance}  Account Balance</div>
+
+
+
+                                <p:graphicImage library="images" name="balance.png" alt="image not there" style="height: 200px; width: 200px;" />
+                            </div>
+
+                            <div class="col-3 ui-card border-round-3xl flex align-items-center p-4">
+
+
+
+                                <div style="font-size: 30px;
+  font-weight: 800;
+  color:#4169E1;"> #{loginForm.recentTransaction.transactionType}:<br/>UGX#{loginForm.formattedTransactionType}  Recent transaction</div>
+
+
+
+                                <p:graphicImage library="images" name="withdraw.png" alt="image not there" style="height: 200px; width: 170px;" />
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+
+                    </div>
                 </div>
-                <p:graphicImage library="images" name="withdraw.png" alt="image not there" style="height: 100px; width: 100px;" />
-                
             </div>
-            
-        </div>
-        <div class="payment--card light-purple">
-            <div class="card--header">
-                <div class="amount">
-                    <span class="title">
-                Financial Reports
-                    </span>
-                   
-                </div>
-                <p:graphicImage library="images" name="reports.png" alt="image not there" style="height: 100px; width: 100px;" />
-                
-            </div>
-            
-        </div>
-    </div>
-
-       
-<!-- <div class="card">
-    <p:dataTable var="user" value="#{userView.users}">
-        <p:column headerText="Code">
-            <h:outputText value="#{user.userName}" />
-        </p:column>
-
-        <p:column headerText="Name">
-            <h:outputText value="#{user.password}" />
-        </p:column>
-
-        <p:column headerText="Category">
-            <h:outputText value="#{product.category}" />
-        </p:column>
-
-        <p:column headerText="Quantity">
-            <h:outputText value="#{product.quantity}" />
-        </p:column>
-    </p:dataTable>
-</div> -->
-
-</p:card>
-
-                 
-</div>
-<div>
-
-</div>
-
-    
-
-    </h:form> 
-  </f:view>             
+        </h:form>
+    </f:view>
 </h:body>
-  
-
 </html>

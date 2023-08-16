@@ -1,82 +1,69 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-    
 </h:head>
-<ui:insert name="header">
-  <!-- Include the header content -->
-  <ui:include src="/template/Header.xhtml" />
-</ui:insert>
-  
+<h:body>
+    <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+        <div id="header" class="grid col-12 ui-card">
+            <ui:insert name="header">
+                <!-- Include the header content -->
+                <ui:include src="/template/Header.xhtml" />
+            </ui:insert>
 
-<h:body class ="body">
-    
+        </div>
 
-    <h:form>
-        <div class="card-container">
-                  <ui:insert name="memberSideBar">
-              <!-- Include the sidebar content -->
-              <ui:include src="/template/memberSideBar.xhtml" />
-          </ui:insert>
-              
-                    
-              
-     
-                  
-              
-              
+        <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+            <div id="side-bar" class="col-2 ui-card border-round-3xl">
+                <ui:insert name="memberSideBar">
+                    <ui:include src="/template/memberSideBar.xhtml" />
+                </ui:insert>
 
-          
-              
-              
+            </div>
 
-              <p:card class="card-2" style="border-radius: 8%;" >
-  <div class="card-content">
-    
-      <p>
-        <b class="h2" style="font-size:25px;">Mission:</b><br/>
-        To empower the local community by providing accessible financial services, promoting savings culture, and fostering economic growth in Kimwanyi Town.
-        <br/>
-        <b class="h2" style="font-size:25px;">Vision:</b>
-        To be the leading Savings and Credit Cooperative Organization, known for our exceptional service, community focus, and commitment to financial inclusion.
-        <br/>
-        <b class="h2" style="font-size:25px;">Values:</b>
-        <br/>
-        <b style="font-size:25px;"> Community-Centric:</b> We are dedicated to the well-being and development of our local community. We prioritize the needs of our members and work towards their financial empowerment.
-        <br/>
-        <b style="font-size:25px;">Integrity:</b> We uphold the highest standards of honesty, transparency, and ethical conduct in all our operations. Trust is at the core of our relationships with members and stakeholders.
-        <br/>
-        <b style="font-size:25px;">Financial Inclusion:</b> We believe in providing equal opportunities for all individuals to access financial services. We strive to serve underserved populations and promote financial inclusion.
-        <br/>
-        <b style="font-size:25px;">Member-Oriented:</b> Our members' success is our priority. We are committed to providing personalized and innovative financial solutions tailored to meet their unique needs and aspirations.
-        <br/>
-        <b style="font-size:25px;">Collaboration:</b> We foster a cooperative spirit by promoting collaboration, teamwork, and partnerships. By working together, we can achieve greater impact and drive positive change in our community.
-        <br/>
-      
-      </p>
-   
-  </div>
-</p:card>
+            <div id="menu" class="col ui-card border-round-3xl p-4">
+                <p style="font-size: 25px;">
+                    <b class="h2" style="font-size:30px;">Mission:</b><br/>
+                    To empower the local community by providing accessible financial services, promoting savings culture, and fostering economic growth in Kimwanyi Town.
+                    <br/>
+                    <b class="h2" style="font-size:30px;">Vision:</b>
+                    To be the leading Savings and Credit Cooperative Organization, known for our exceptional service, community focus, and commitment to financial inclusion.
+                    <br/>
+                    <b class="h2" style="font-size:30px;">Values:</b>
+                    <br/>
+                    <b style="font-size:30px;"> Community-Centric:</b> We are dedicated to the well-being and development of our local community. We prioritize the needs of our Member and work towards their financial empowerment.
+                    <br/>
+                    <b style="font-size:30px;">Integrity:</b> We uphold the highest standards of honesty, transparency, and ethical conduct in all our operations. Trust is at the core of our relationships with Member and stakeholders.
+                    <br/>
+                    <b style="font-size:30px;">Financial Inclusion:</b> We believe in providing equal opportunities for all individuals to access financial services. We strive to serve underserved populations and promote financial inclusion.
+                    <br/>
+                    <b style="font-size:30px;">Member-Oriented:</b> Our Member' success is our priority. We are committed to providing personalized and innovative financial solutions tailored to meet their unique needs and aspirations.
+                    <br/>
+                    <b style="font-size:30px;">Collaboration:</b> We foster a cooperative spirit by promoting collaboration, teamwork, and partnerships. By working together, we can achieve greater impact and drive positive change in our community.
+                    <br/>
 
- </div>
-    </h:form> 
-          
+                </p>
+            </div>
+        </div>
+    </div>
 </h:body>
-
-
 </html>

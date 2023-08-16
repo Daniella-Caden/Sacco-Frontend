@@ -85,7 +85,7 @@ position: absolute;
 }
 
 .card1{
-width: 15rem;
+/*width: 15rem;*/
 height: 35rem; 
 border-radius: 8%;
 position:fixed;
@@ -113,7 +113,7 @@ height: 50px; width: 50px;
 }
 
 .card-2{
-width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;
+height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;
 }
 .h1{
 color:#4169E1;font-size:25px;

@@ -1,158 +1,70 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-    
 </h:head>
-          
-        <ui:insert name="header">
-          <!-- Include the header content -->
-          <ui:include src="/template/Header.xhtml" />
-      </ui:insert>
-
-<h:body class ="body">
-    
-<f:view>
-      <h:form>
-      <p:growl id="growl" showDetail="true" sticky="false" />
-        <div class="card-container">
-            <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
->
-<h:head>
-    <h:outputStylesheet name="css/App.css"/>
-      
-</h:head>
-
 <h:body>
-    <p:card style="width: 15rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;">
-                <div style="display: flex; flex-direction: column; height: 100%;">
-                    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 1rem;">
-                      <p:commandLink action="#{dashboard.viewProfile()}" style="display: inline-block; height: 100px; width: 100px;" title="View Profile">
-                        <i class="pi pi-user"  style="color:#4169E1; font-size:100px;top:200px;"></i>
-                    </p:commandLink>
-                    
-                     
-                           
-      
-                          
-                    </div>
-                  <div style="display: grid; grid-template-rows: 1fr 1fr 1fr; gap: 1rem;top:200px; margin-bottom: 1rem;">
-                    
-                    <div style="display: flex; align-items: center;left:20px; justify-content: center;" class="button-like-text" >
-                    
-                      Welcome,#{loginForm.m.firstName}
-                    </div>
+    <p:growl id="growl" showDetail="true" sticky="false" />
 
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="home.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.dashboard}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Dashboard</p:link>
-                    </span>
-              
-                    <span style="display: flex; align-items: center;">
-                      <p:graphicImage library="images" name="transaction.png" alt="image not there" style="height: 50px; width: 50px;" />
-                      <p:link outcome="#{navigation.transaction}" style="background: none;
-                      border: none;
-                      color: #4169E1 ;
-                      cursor: pointer;
-                      text-decoration: none;
-                      transition: color 0.3s;
-                      font-size: 18px;">Make a transaction</p:link>
+    <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+        <div id="header" class="grid col-12 ui-card">
+            <ui:insert name="header">
+                <!-- Include the header content -->
+                <ui:include src="/template/Header.xhtml" />
+            </ui:insert>
 
-                    </span>
-              
-                   
-                    <span style="display: flex; align-items: center;">
-                        <p:graphicImage library="images" name="history.png" alt="image not there" style="height: 50px; width: 50px;" />
-                        <p:link outcome="#{navigation.history}" style="background: none;
-                        border: none;
-                        color: #4169E1 ;
-                        cursor: pointer;
-                        text-decoration: none;
-                        transition: color 0.3s;
-                        font-size: 18px;">Transaction History</p:link>
-                       
-
-                      </span>
-
-                      
-                  </div>
-              
-                  
-                </div>
-              </p:card>
-              
-            
-      
-    </h:body>
-</html>
-
-          <ui:insert name="memberSideBar">
-            <!-- Include the sidebar content -->
-            <ui:include src="/template/memberSideBar.xhtml" />
-        </ui:insert> 
-
-        
-          <div class="col-9">
-    <p:card class="card-2" style="border-radius: 8%;" >
-  <div class="card-content">
-    
-    <p>
-        <b class="h1">Welcome to Kimwanyi SACCO</b><br/>
-
-        At Kimwanyi SACCO, we are dedicated to the financial empowerment of our local community in the small town of Kimwanyi. <br/>
-
-        <b class="h2" style="font-size:22px;">Our Purpose:</b><br/>
-
-       <b style="font-size:22px;"> Community Focus:</b> Kimwanyi SACCO has a strong focus on supporting and uplifting the local community. We strive to provide accessible and affordable financial services to the residents of our village, empowering them to achieve their financial goals.<br/>
-
-        <b class="h2" style="font-size:18px;">Member Benefits:</b> <br/>
-
-        <b style="font-size:18px;">Savings:</b> Easily save and grow your money with our competitive interest rates and flexible savings plans tailored to meet your needs.<br/>
-
-        <b style="font-size:18px;">Credit Facilities:</b> Access credit facilities for various purposes, such as education, business development, or emergencies, with convenient repayment options.<br/>
-
-       <b style="font-size:18px;"> Account Management:</b> Our user-friendly online platform allows you to manage your accounts, track your savings, and view transaction history anytime, anywhere.<br/>
-
-        <b style="font-size:18px;">Community Support:</b> By joining Kimwanyi SACCO, you become part of a community-focused organization that invests in local development initiatives and promotes financial literacy among its members.
-      </p>
-   
-  </div>
-</p:card>
-          </div>
         </div>
-                 
-</div>
 
-    </h:form> 
-</f:view>             
+        <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+            <div id="side-bar" class="col-2 ui-card border-round-3xl">
+                <ui:insert name="memberSideBar">
+                    <ui:include src="/template/memberSideBar.xhtml" />
+                </ui:insert>
+
+            </div>
+
+            <div id="menu" class="col ui-card border-round-3xl p-4">
+                <b class="h1" style="font-size: 40px;">Welcome to Kimwanyi SACCO</b><br/>
+                <p style="font-size: 25px;" >
+
+
+                    At Kimwanyi SACCO, we are dedicated to the financial empowerment of our local community in the small town of Kimwanyi. <br/>
+
+                    <b class="h2" style="font-size:25px;">Our Purpose:</b><br/>
+
+                    <b style="font-size:25px;"> Community Focus:</b> Kimwanyi SACCO has a strong focus on supporting and uplifting the local community. We strive to provide accessible and affordable financial services to the residents of our village, empowering them to achieve their financial goals.<br/>
+
+                    <b class="h2" style="font-size:25px;">Member Benefits:</b> <br/>
+
+                    <b style="font-size:25px;">Savings:</b> Easily save and grow your money with our competitive interest rates and flexible savings plans tailored to meet your needs.<br/>
+
+                    <b style="font-size:25px;">Credit Facilities:</b> Access credit facilities for various purposes, such as education, business development, or emergencies, with convenient repayment options.<br/>
+
+                    <b style="font-size:25px;"> Account Management:</b> Our user-friendly online platform allows you to manage your accounts, track your savings, and view transaction history anytime, anywhere.<br/>
+
+                    <b style="font-size:25px;">Community Support:</b> By joining Kimwanyi SACCO, you become part of a community-focused organization that invests in local development initiatives and promotes financial literacy among its members.
+                </p>
+            </div>
+        </div>
+    </div>
 </h:body>
-  
-
 </html>

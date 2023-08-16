@@ -1,67 +1,66 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-    
 </h:head>
-<ui:insert name="header">
-  <!-- Include the header content -->
-  <ui:include src="/template/Header.xhtml" />
-</ui:insert>
-  
+<h:body>
+    <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+        <div id="header" class="grid col-12 ui-card">
+            <ui:insert name="header">
+                <!-- Include the header content -->
+                <ui:include src="/template/Header.xhtml" />
+            </ui:insert>
 
-<h:body class ="body">
-    
+        </div>
 
-    <h:form>
-        <div class="card-container">
-          <ui:insert name="memberSideBar">
-            <!-- Include the sidebar content -->
-            <ui:include src="/template/memberSideBar.xhtml" />
-        </ui:insert>
-                              
-              <p:card class="card-2" style="border-radius: 8%;" >
-  <div class="card-content">
-    
-    
-      <p>
-<b class="h1">Membership Eligibility:</b>
-<br/>
-1. <b>Residence:</b> Membership at Kimwanyi SACCO is open to individuals residing within Kimwanyi Town. 
-<br/>
-<br/>
-2.<b>Age Requirement:</b> Members must be at least 18 years old to be eligible for membership. This ensures that individuals have reached the legal age to engage in financial transactions and benefit from our services.
-<br/>
-<br/>
-3.<b>Community Engagement:</b> We encourage individuals who are actively involved in community activities and have a strong commitment to the betterment of our local area to join Kimwanyi SACCO. Our SACCO values community engagement and aims to build a strong network of members working towards a common goal.
-<br/>
-<br/>
-4.<b>Affinity to SACCO's Values:</b> We seek individuals who align with our mission, vision, and values, and are committed to the principles of financial responsibility, cooperation, and mutual support. Members should share our dedication to community development and financial inclusion.
-<br/>
-<br/>
-5.<b>Other Requirements:</b> Additional specific eligibility criteria or documentation may be required, such as proof of residency, identification documents, and any applicable membership fees. 
-   </p>
-  </div>
-</p:card>
+        <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+            <div id="side-bar" class="col-2 ui-card border-round-3xl">
+                <ui:insert name="memberSideBar">
+                    <ui:include src="/template/memberSideBar.xhtml" />
+                </ui:insert>
 
-                 
-</div>
-    </h:form>              
+            </div>
+
+            <div id="menu" class="col ui-card border-round-3xl p-5">
+                <p style="font-size: 25px;">
+                <b class="h1" style="font-size:30px;">Memberhip Eligibility:</b>
+                <br/>
+                1. <b >Residence:</b> Memberhip at Kimwanyi SACCO is open to individuals residing within Kimwanyi Town.
+                <br/>
+                <br/>
+                2.<b>Age Requirement:</b> Member must be at least 18 years old to be eligible for Memberhip. This ensures that individuals have reached the legal age to engage in financial Transaction and benefit from our services.
+                <br/>
+                <br/>
+                3.<b>Community Engagement:</b> We encourage individuals who are actively involved in community activities and have a strong commitment to the betterment of our local area to join Kimwanyi SACCO. Our SACCO values community engagement and aims to build a strong network of Member working towards a common goal.
+                <br/>
+                <br/>
+                4.<b>Affinity to SACCO's Values:</b> We seek individuals who align with our mission, vision, and values, and are committed to the principles of financial responsibility, cooperation, and mutual support. Member should share our dedication to community development and financial inclusion.
+                <br/>
+                <br/>
+                5.<b>Other Requirements:</b> Additional specific eligibility criteria or documentation may be required, such as proof of residency, identification documents, and any applicable Memberhip fees.
+            </p>
+
+            </div>
+        </div>
+    </div>
 </h:body>
-  
-
 </html>

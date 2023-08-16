@@ -1,129 +1,123 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes"/>
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-  
 </h:head>
-<ui:insert name="memberHeader">
-  <!-- Include the header content -->
-  <ui:include src="/template/memberHeader.xhtml" />
-</ui:insert>
+<h:body>
+    <f:event type="preRenderView" listener="#{loginForm.checkSessionValidity()}" />
 
-                    
-                    
-             
-  
-
-<h:body style ="background-color: rgb(252, 250, 250);">
-    
-
-    
-        <div class="card-container">
-            
-              
-            <ui:insert name="memberHeader">
+    <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+        <div id="header" class="grid col-12 ui-card">
+            <ui:insert name="header">
                 <!-- Include the header content -->
-                <ui:include src="/template/adminSidebar.xhtml" />
-              </ui:insert> 
-              
-              
+                <ui:include src="/template/adminHeader.xhtml"/>
+            </ui:insert>
 
-          
-              
-              
+        </div>
 
-<p:card style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;">
-    <h1 style="text-align: center; color:#4169E1">Transaction</h1>
-   <div class="card flex justify-content-center">
-
-      <f:view>
-         <div class="w-9 h-auto border-50  surface-ground shadow-1 p-2 border-round-sm">
-            <h:form>
-     
-         <div class="formgrid grid">
-            <div class="field col-12 md:col-6 ">
-               <h:outputLabel for="firstname6" value="First"/>
-               <p:inputText value="#{admin.memberTransaction.member.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" readonly="true"/>
-            </div> 
-            </div>             
-
-            <div class="formgrid grid">
-               <div class="field col-12 md:col-6 ">
-                  <h:outputLabel for="firstname6" value="Last Name"/>
-                  <p:inputText value="#{admin.memberTransaction.member.lastName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" readonly="true"/>
-               </div>
-               </div>
-              
-               <div class="formgrid grid">
-                <div class="field col-12 md:col-6 ">
-                <h:outputLabel for="firstname6" value="Amount"/>
-                <p:inputText value="#{admin.memberTransaction.amount}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" readonly="true"/>
-                    </div>
-                    </div>
-                    
-                 <div class="formgrid grid">
-                        <div class="field col-12 md:col-6 ">
-                        <h:outputLabel for="firstname6" value="Account Balance"/>
-                        <p:inputText value="#{admin.memberTransaction.member.accountBalance}"   class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
-                            </div>    
-               
-               
-              
-
-
+        <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+            <div id="side-bar" class="grid col-2 ui-card border-round-3xl">
+                <ui:insert name="memberSideBar">
+                    <ui:include src="/template/adminSidebar.xhtml"/>
+                </ui:insert>
 
             </div>
 
-               <p:divider/>
-               <div class="formgrid grid">
-            <div class="field col-12 md:col-6">
-               <p:commandButton value="Approve" icon="pi pi-check" style="background-color:#4169E1" action="#{admin.approveWithdrawal(admin.memberTransaction.member.userName,admin.memberTransaction.id,'APPROVE')}">
-                <p:confirm type="popup" header="Confirmation" message="Are you sure you want to approve this withdraw request?" icon="pi pi-exclamation-triangle"/>
-            </p:commandButton>
-               
+            <div id="menu" class="grid col ui-card border-round-3xl flex align-items-center flex-column gap-4">
 
-              </div>
+                <div>
+                    <h1 style="text-align: center; color:#4169E1">Transaction</h1>
+                </div>
+
+                <div class="col-8 w-9 border-50 mt-8  surface-ground shadow-1 p-2 border-round-sm">
+                    <h:form>
+
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
 
 
-              <div class="field col-12 md:col-6">
-               <p:commandButton value="Reject" icon="pi pi-times"  styleClass="ui-button-danger"  action="#{admin.approveWithdrawal(admin.memberTransaction.member.userName,admin.memberTransaction.id,'REJECT')}">
-                  <p:confirm type="popup" header="Confirmation" message="Are you sure you want to reject this withdraw request?" icon="pi pi-exclamation-triangle"/>
-               </p:commandButton>
-                <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 ">
+                                <h:outputLabel for="firstname6" value="First"/>
+                                <p:inputText value="#{approveWithdraws.memberTransaction.member.firstName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" readonly="true"/>
+                            </div>
+                        </div>
 
-              </div> 
-              <p:confirmPopup global="true">
-               <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
-               <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
-           </p:confirmPopup>
-              </div>
-         </h:form>
-         </div>
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 ">
+                                <h:outputLabel for="firstname6" value="Last Name"/>
+                                <p:inputText value="#{approveWithdraws.memberTransaction.member.lastName}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" readonly="true"/>
+                            </div>
+                        </div>
 
-      </f:view>
-   </div>
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 ">
+                                <h:outputLabel for="firstname6" value="Amount"/>
+                                <p:inputText value="#{approveWithdraws.memberTransaction.amount}" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" readonly="true"/>
+                            </div>
+                        </div>
 
-</p:card>
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6 ">
+                                <h:outputLabel for="firstname6" value="Account Balance"/>
+                                <p:inputText value="#{approveWithdraws.getAccountBalance(approveWithdraws.memberTransaction.member.userName)}"   class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full" disabled="true"/>
+                            </div>
 
-                 
-</div>
 
-               
+
+
+
+
+                        </div>
+
+                        <p:divider/>
+                        <div class="formgrid grid">
+                            <div class="field col-12 md:col-6">
+                                <p:commandButton value="Approve" icon="pi pi-check" style="background-color:#4169E1" action="#{approveWithdraws.approveWithdrawal(approveWithdraws.memberTransaction.member.userName,approveWithdraws.memberTransaction.transactionId,'APPROVE')}">
+                                    <p:confirm type="popup" header="Confirmation" message="Are you sure you want to approve this withdraw request?" icon="pi pi-exclamation-triangle"/>
+                                </p:commandButton>
+
+
+                            </div>
+
+
+                            <div class="field col-12 md:col-6">
+                                <p:commandButton value="Reject" icon="pi pi-times"  styleClass="ui-button-danger"  action="#{approveWithdraws.approveWithdrawal(approveWithdraws.memberTransaction.member.userName,approveWithdraws.memberTransaction.transactionId,'REJECT')}">
+                                    <p:confirm type="popup" header="Confirmation" message="Are you sure you want to reject this withdraw request?" icon="pi pi-exclamation-triangle"/>
+                                </p:commandButton>
+                                <!-- <p:button value="Back Dasboard" outcome="#{navigation.dashboard}"/> -->
+
+                            </div>
+                            <p:confirmPopup global="true">
+                                <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirm-popup-yes" />
+                            </p:confirmPopup>
+                        </div>
+                    </h:form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
 </h:body>
-  
-
 </html>

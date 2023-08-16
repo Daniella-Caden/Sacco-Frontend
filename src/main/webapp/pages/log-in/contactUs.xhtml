@@ -1,78 +1,72 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-    
 </h:head>
-<ui:insert name="header">
-  <!-- Include the header content -->
-  <ui:include src="/template/Header.xhtml" />
-</ui:insert>
-  
-  
+<h:body>
+    <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+        <div id="header" class="grid col-12 ui-card">
+            <ui:insert name="header">
+                <!-- Include the header content -->
+                <ui:include src="/template/Header.xhtml" />
+            </ui:insert>
 
-<h:body class ="body">
-    
-
-    <h:form>
-        <div class="card-container">
-          <ui:insert name="memberSideBar">
-            <!-- Include the sidebar content -->
-            <ui:include src="/template/memberSideBar.xhtml" />
-        </ui:insert> 
-
-                  
-              
-
-          
-              
-              
-
-  <p:card class="card-2" style="border-radius: 8%;" >
-  <div class="card-content">
-  <div style=" display: flex; gap: 20px;">
-        <div class="contact-item" style=" flex: 1;">
-          <h3 class="h2">Contact Information</h3>
-          <p>Email: info@example.com</p>
-          <p>Phone: 0767836782</p>
-          <p>Address: Nok Building,Kitezi Road,Kimwanyi Town</p>
-        </div>
-        <div class="contact-item" style="flex:1;">
-          <h3 class="h2">Office Hours</h3>
-          <p>Monday - Friday: 9am - 5pm</p>
-          <p>Saturday: 10am - 2pm</p>
-          <p>Sunday: Closed</p>
         </div>
 
-        <div class="contact-item" style="flex:1;">
-            <h3 class="h2">Staff directory</h3>
-            <ul>
-                <li>William Odoch - CEO<br/>Phone: 07864538789<br/>Email: wiliam.odoch@info.com</li>
-                <li>Rose Nakimera- Customer Service<br/>Phone: 0784536728<br/>Email: rose.naki@gmail.com</li>
-              </ul>
-          </div>
-      </div>
-      </div>
-</p:card>
+        <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+            <div id="side-bar" class="col-2 ui-card border-round-3xl">
+                <ui:insert name="memberSideBar">
+                    <ui:include src="/template/memberSideBar.xhtml" />
+                </ui:insert>
 
-                 
-</div>
-    </h:form>              
+            </div>
+
+            <div id="menu" class="col ui-card border-round-3xl p-4">
+                <div class="card-content" style="font-size: 25px;">
+                    <div style="font-size: 25px; display: flex; gap: 20px;">
+                        <div class="contact-item" style=" flex: 1;">
+                            <h3 class="h2">Contact Information</h3>
+                            <p>Email: info@example.com</p>
+                            <p>Phone: 0767836782</p>
+                            <p>Address: Nok Building,Kitezi Road,Kimwanyi Town</p>
+                        </div>
+                        <div class="contact-item" style="flex:1;">
+                            <h3 class="h2">Office Hours</h3>
+                            <p>Monday - Friday: 9am - 5pm</p>
+                            <p>Saturday: 10am - 2pm</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+
+                        <div class="contact-item" style="flex:1;">
+                            <h3 class="h2">Staff directory</h3>
+                            <ul>
+                                <li>William Odoch - CEO<br/>Phone: 07864538789<br/>Email: wiliam.odoch@info.com</li>
+                                <li>Rose Nakimera- Customer Service<br/>Phone: 0784536728<br/>Email: rose.naki@gmail.com</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </h:body>
-  
-
 </html>

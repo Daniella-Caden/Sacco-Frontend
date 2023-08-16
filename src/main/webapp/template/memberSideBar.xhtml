@@ -25,75 +25,120 @@ font-size: 18px;
 </h:head>
 
 <h:body>
-  <div class="grid">
-    <div class="col-3">
-    <p:card class="card1" style="border-radius: 8%;" >
-        <div class="card1-div1">
-          <div class="card1-div2">
-            <span class="card1-span">
-              <p:graphicImage library="images" name="home.png" alt="image not there" class="linkImage" />
-              <p:link outcome="#{navigation.home}" style="background: none;
+    <div class="mt-8 ml-3">
+        <div class="flex align-items-center">
+
+            <p:graphicImage
+                    library="images"
+                    name="home.png"
+                    alt="image not there"
+                    height="50px"
+            />
+
+            <p:link
+                    outcome="#{navigation.home}"
+                    style="
+              background: none;
               border: none;
-              color: #4169E1 ;
+              color: #4169e1;
               cursor: pointer;
               text-decoration: none;
               transition: color 0.3s;
-              font-size: 18px;">Home</p:link>
+              font-size: 30px;
+            "
+            >Home</p:link
+            > </div>
 
-            </span>
-      
-            <span class="card1-span">
-              <p:graphicImage library="images" name="aboutUspng.png" alt="image not there" class="linkImage" />
-              <p:link outcome="#{navigation.about}" style="background: none;
-              border: none;
-              color: #4169E1 ;
-              cursor: pointer;
-              text-decoration: none;
-              transition: color 0.3s;
-              font-size: 18px;">About Us</p:link>
-
-            </span>
-      
-            <span class="card1-span">
-              <p:graphicImage library="images" name="eligibity.png" alt="image not there" class="linkImage" />
-              <p:link outcome="#{navigation.memberEligibility}" style="background: none;
-              border: none;
-              color: #4169E1 ;
-              cursor: pointer;
-              text-decoration: none;
-              transition: color 0.3s;
-              font-size: 18px;">Member Eligibity</p:link>
-
-            </span>
-            <span class="card1-span">
-                <p:graphicImage library="images" name="apply.png" alt="image not there" class="linkImage" />
-                <p:link outcome="#{navigation.apply}" style="background: none;
+        <div class="flex align-items-center mt-5">
+            <p:graphicImage
+                    library="images"
+                    name="aboutUspng.png"
+                    alt="image not there"
+                    height="50px"
+            />
+            <p:link
+                    outcome="#{navigation.about}"
+                    style="
+                background: none;
                 border: none;
-                color: #4169E1 ;
+                color: #4169e1;
                 cursor: pointer;
                 text-decoration: none;
                 transition: color 0.3s;
-                font-size: 18px;">Apply to join</p:link>
+                font-size: 30px;
+              "
+            >About Us</p:link
+            >
 
-              </span>
-
-              <span class="card1-span">
-                <p:graphicImage library="images" name="contact.jpg" alt="image not there" class="linkImage" />
-                <p:link outcome="#{navigation.contactUs}" style="background: none;
-                border: none;
-                color: #4169E1 ;
-                cursor: pointer;
-                text-decoration: none;
-                transition: color 0.3s;
-                font-size: 18px;">Contact Us</p:link>
-
-              </span>
-          </div>
-      
-          
         </div>
-      </p:card>
+
+        <div class="flex align-items-center mt-5">
+
+            <p:graphicImage
+                    library="images"
+                    name="eligibity.png"
+                    alt="image not there"
+                    height="50px"
+            />
+            <p:link
+                    outcome="#{navigation.memberEligibility}"
+                    style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+            >Member Eligibity</p:link
+            >
+        </div>
+
+        <div class="flex align-items-center mt-5">
+            <p:graphicImage
+                    library="images"
+                    name="apply.png"
+                    alt="image not there"
+                    height="50px"
+            />
+            <p:link
+                    outcome="#{navigation.apply}"
+                    style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+            >Apply to join</p:link
+            >
+        </div>
+
+        <div class="flex align-items-center mt-5">
+            <p:graphicImage
+                    library="images"
+                    name="contact.jpg"
+                    alt="image not there"
+                    height="40px"
+            />
+            <p:link
+                    outcome="#{navigation.contactUs}"
+                    style="
+                background: none;
+                border: none;
+                color: #4169e1;
+                cursor: pointer;
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 30px;
+              "
+            >Contact Us</p:link
+            >
+        </div>
+
     </div>
-  </div>
     </h:body>
 </html>

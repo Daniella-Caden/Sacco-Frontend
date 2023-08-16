@@ -1,87 +1,77 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
-
 <h:head>
     <f:facet name="first">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
 
-        <h:outputStylesheet name="primeflex/3.3.1/primeflex.css" library="webjars"/>
-        <h:outputStylesheet name="css/App.css"/>
+        <h:outputStylesheet
+                name="primeflex/3.3.1/primeflex.css"
+                library="webjars"
+        />
     </f:facet>
-   
 </h:head>
-<ui:insert name="memberHeader">
-  <!-- Include the header content -->
-  <ui:include src="/template/adminHeader.xhtml" />
-</ui:insert>
-  
+<h:body>
+    <f:view>
+        <f:event type="preRenderView" listener="#{loginForm.checkSessionValidity()}" />
+        <h:form>
 
-<h:body style ="background-color: rgb(252, 250, 250);">
-    
+            <div id="outer" class="grid col max-w-screen gap-5 ml-2 mr-2 mb-5 mt-2">
+                <div id="header" class="grid col-12 ui-card">
+                    <ui:insert name="header">
+                        <!-- Include the header content -->
+                        <ui:include src="/template/adminHeader.xhtml" />
+                    </ui:insert>
 
-    <h:form>
-        <div class="card-container">
-            <ui:insert name="memberHeader">
-  <!-- Include the header content -->
-  <ui:include src="/template/adminSidebar.xhtml" />
-</ui:insert>
-             
-              
-              
+                </div>
 
-          
-              
-              
+                <div class="grid col-12 mx-0 p-0 gap-6" id="inner" style="height:710px;">
+                    <div id="side-bar" class="col-2 ui-card border-round-3xl">
+                        <ui:insert name="memberSideBar">
+                            <ui:include src="/template/adminSidebar.xhtml" />
+                        </ui:insert>
 
+                    </div>
 
-    <div class="card">
-       
-          
-    <p:dataTable style="width: 76rem; height: 35rem; border-radius: 8%;position:fixed;top:120px;right:8px;overflow-y:auto;" paginator="true" rows="6" sortMode="single" var="t" value="#{admin.viewRequests()}">
-        
-        <p:column headerText="Date" style="color:#4169E1; font-size:x-large" >
-            <h:outputText value="#{t.createdOn}" style="color:black;"/>
-        </p:column>
+                    <div id="menu" class="grid col" style="flex: 1; overflow: auto;">
 
-        <p:column headerText=" First Name" style="color:#4169E1; font-size:x-large;" >
-            <h:outputText value="#{t.member.firstName}" style="color:black;"/>
-        </p:column>
+                        <p:dataTable  paginator="true" rows="6" sortMode="single" style="width: 100%; max-width: 1506px; height:710px;"  var="t" value="#{withdrawRequests.viewRequests()}">
 
-        <p:column headerText=" Last Name" style="color:#4169E1; font-size:x-large;" >
-            <h:outputText value="#{t.member.lastName}" style="color:black;"/>
-        </p:column>
+                            <p:column headerText="Date" style="color:#4169E1; font-size:x-large" >
+                                <h:outputText value="#{t.createdOn}" style="color:black;"/>
+                            </p:column>
 
-        
-        
-        <p:column >          
-        <p:commandButton value="View" icon="pi pi-eye"  style="width:100px;height:50px;background-color:#4169E1" action="#{admin.viewWithdrawal(t)}"/>
-        </p:column>
+                            <p:column headerText=" First Name" style="color:#4169E1; font-size:x-large;" >
+                                <h:outputText value="#{t.member.firstName}" style="color:black;"/>
+                            </p:column>
 
-    
-    </p:dataTable>
-
-    
-</div> 
-
-   
+                            <p:column headerText=" Last Name" style="color:#4169E1; font-size:x-large;" >
+                                <h:outputText value="#{t.member.lastName}" style="color:black;"/>
+                            </p:column>
 
 
 
-                 
-</div>
-<div>
+                            <p:column >
+                                <p:commandButton value="View" icon="pi pi-eye"  style="width:100px;height:50px;background-color:#4169E1" actionListener="#{approveWithdraws.setMemberTransaction(t)}" action="#{navigation.getApproveWithdraw()}"/>
+                            </p:column>
 
-</div>
-    </h:form>              
+                        </p:dataTable>
+
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </f:view>
 </h:body>
-  
-
 </html>
