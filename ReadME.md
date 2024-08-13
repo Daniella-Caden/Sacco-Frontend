@@ -1,19 +1,12 @@
-# Kimwanyi SACCO - Web Application
-This project is to help bootstrap a JSF application.
+# Kimwanyi SACCO 
+**Overview**
+Kimwanyi SACCO Management System is a web-based application designed to manage the operations of the Kimwanyi Savings and Credit Cooperative Organization (SACCO). This system streamlines the management of member records, loan processing, savings, withdrawals, and report generation. The application is developed using JavaServer Faces (JSF) for the front-end and Hibernate for the back-end, ensuring a robust and efficient management system.
 
-## Getting Started
-- Fork the project and get your own copy.
-- Clone the project to your local machine.
-- Ensure you have the following installed:
-    - Java 8+
-    - Maven
-    - Git
-    - Tomcat 8+
+**Features**
+Member Management: Register new members, update member details, and manage member accounts.
+Loan Management: Apply for loans, approve/reject loan applications, and track loan repayment schedules.
+Savings and Withdrawals: Record member savings, process withdrawals, and monitor account balances.
 
-## Running the application
-- Create a running configuration for Tomcat 8+.
-- run package on the project to generate a war file.
-- Deploy the war file to the Tomcat server.
-- You should be able to access the application on https:?//Landing.xhtml
+
 
 
