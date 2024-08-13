@@ -6,7 +6,9 @@ Kimwanyi SACCO Management System is a web-based application designed to manage t
 **Features**
 
 Member Management: Register new members, update member details, and manage member accounts.
+
 Loan Management: Apply for loans, approve/reject loan applications, and track loan repayment schedules.
+
 Savings and Withdrawals: Record member savings, process withdrawals, and monitor account balances.
 
 
